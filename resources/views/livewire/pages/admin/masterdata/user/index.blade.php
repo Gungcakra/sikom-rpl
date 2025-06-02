@@ -13,7 +13,7 @@
                 <ul class="breadcrumb breadcrumb-separatorless fw-semibold fs-7 my-0 pt-1">
                     <!--begin::Item-->
                     <li class="breadcrumb-item text-muted">
-                        <a href="{{ route('dashboard') }}" class="text-muted text-hover-primary">Home</a>
+                        <a href="{{ route('dashboard') }}" class="text-muted text-hover-primary" wire:navigate>Home</a>
                     </li>
                     <!--end::Item-->
                     <!--begin::Item-->
@@ -28,7 +28,7 @@
                 <!--end::Breadcrumb-->
             </div>
             <div class="d-flex items-center">
-                {{-- <input type="text" class="form-control form-control-solid" placeholder="Search User Name" id="search" autocomplete="off" wire:model.live.dobonce.300ms="search" /> --}}
+                {{-- <input type="text" class="form-control form-control-solid" placeholder="Cari User Name" id="search" autocomplete="off" wire:model.live.dobonce.300ms="search" /> --}}
             </div>
             <!--end::Page title-->
             <!--begin::Actions-->
@@ -37,7 +37,7 @@
                 {{-- <a href="#" class="btn btn-sm fw-bold btn-secondary" data-bs-toggle="modal" data-bs-target="#kt_modal_create_app">Rollover</a> --}}
                 <!--end::Secondary button-->
                 <!--begin::Primary button-->
-                <button class="btn btn-sm fw-bold btn-primary" wire:click="create()">Add User</button>
+                <button class="btn btn-sm fw-bold btn-primary" wire:click="create()">Tambah User</button>
                 <!--end::Primary button-->
             </div>
             <!--end::Actions-->
@@ -60,7 +60,7 @@
                             type="text"
                             data-kt-customer-table-filter="search"
                             class="form-control form-control-solid w-250px ps-12"
-                            placeholder="Search User"
+                            placeholder="Cari User"
                             wire:model.live.debounce.100ms="search"
                         />
                     </div>
@@ -71,7 +71,7 @@
                         <thead>
                             <tr class="fw-semibold fs-6 text-muted">
                                 <th>No</th>
-                                <th>Action</th>
+                                <th>Aksi</th>
                                 <th>Name</th>
                                 <th>Email</th>
                                 <th>Role</th>
@@ -79,7 +79,7 @@
                         </thead>
                         <tbody>
                             @if (count($data) < 1) <tr>
-                                <td colspan="6" class="text-center">No Data Found</td>
+                                <td colspan="6" class="text-center">Tidak Ada Data</td>
                                 </tr>
                                 @else
     

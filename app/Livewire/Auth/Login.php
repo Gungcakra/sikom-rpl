@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Auth;
 
+use App\Models\LoginLog;
 use Livewire\Component;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Attributes\Layout;
@@ -27,11 +28,20 @@ class Login extends Component
         }
 
         if (Auth::attempt(['email' => $this->email, 'password' => $this->password], $this->remember)) {
-            session()->regenerate();
-
-            session(['user_id' => Auth::id()]);
-
-            return $this->dispatch('success-login', 'Login successful.');
+           $loginLog = LoginLog::create([
+                'id_user' => Auth::id(),
+                'waktu_login' => now(),
+            ]);
+            if (!$loginLog) {
+                $this->dispatch('error', 'Failed to log login time.');
+                return;
+            }else {
+                session()->regenerate();
+    
+                session(['user_id' => Auth::id()]);
+    
+                return $this->dispatch('success-login', 'Login successful.');
+            }
         } else {
             $this->dispatch('error', 'Invalid email or password.');
         }
@@ -40,6 +50,9 @@ class Login extends Component
     public function logout()
     {
         Auth::logout();
+        LoginLog::where('id_user', Auth::id())
+            ->whereNull('waktu_logout')
+            ->update(['waktu_logout' => now()]);
         session()->invalidate();
         session()->regenerateToken();
 

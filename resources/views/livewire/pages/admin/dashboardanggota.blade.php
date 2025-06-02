@@ -41,155 +41,11 @@
         <div id="kt_app_content_container" class="app-container container-xxl"  style="min-height: 100vh">
             <!--begin::Row-->
             <div class="row g-5 g-xl-10 mb-5 mb-xl-10">
+               
+               
+               
                 <!--begin::Col-->
-                <div class="col-xl-3">
-                    <!--begin::Card widget 3-->
-                    <div class="card card-flush bgi-no-repeat bgi-size-contain bgi-position-x-end h-xl-100" style="background-color: #F1416C;background-image:url('assets/media/svg/shapes/wave-bg-red.svg')">
-                        <!--begin::Header-->
-                        <div class="card-header pt-5 mb-3">
-                            <!--begin::Icon-->
-                            <div class="d-flex flex-center rounded-circle h-80px w-80px" style="border: 1px dashed rgba(255, 255, 255, 0.4);background-color: #F1416C">
-                                <i class="ki-duotone ki-call text-white fs-2qx lh-0">
-                                    <span class="path1"></span>
-                                    <span class="path2"></span>
-                                    <span class="path3"></span>
-                                    <span class="path4"></span>
-                                    <span class="path5"></span>
-                                    <span class="path6"></span>
-                                    <span class="path7"></span>
-                                    <span class="path8"></span>
-                                </i>
-                            </div>
-                            <!--end::Icon-->
-                        </div>
-                        <!--end::Header-->
-                        <!--begin::Card body-->
-                        <div class="card-body d-flex align-items-end mb-3">
-                            <!--begin::Info-->
-                            <div class="d-flex justify-content-center flex-column">
-                                <span class="fs-2hx text-white fw-bold me-6">{{ $organisasiCount }}</span>
-                                {{-- <div class="fw-bold fs-6 text-white">
-									<span class="d-block">This Month</span>
-									<span class="">Income</span>
-								</div> --}}
-                            </div>
-                            <!--end::Info-->
-                        </div>
-                        <!--end::Card body-->
-                        <!--begin::Card footer-->
-                        <div class="card-footer" style="border-top: 1px solid rgba(255, 255, 255, 0.3);background: rgba(0, 0, 0, 0.15);">
-                            <!--begin::Progress-->
-                            <div class="fw-bold text-white py-2">
-                                <span class="fs-1 d-block">Jumlah Organisasi</span>
-                                {{-- <span class="opacity-50">Income</span> --}}
-                            </div>
-                            <!--end::Progress-->
-                        </div>
-                        <!--end::Card footer-->
-                    </div>
-                    <!--end::Card widget 3-->
-                </div>
-                <!--end::Col-->
-                <!--begin::Col-->
-                <div class="col-xl-3">
-                    <!--begin::Card widget 3-->
-                    <div class="card card-flush bgi-no-repeat bgi-size-contain bgi-position-x-end h-xl-100" style="background-color: #40B876;background-image:url('assets/media/svg/shapes/wave-bg-purple.svg')">
-                        <!--begin::Header-->
-                        <div class="card-header pt-5 mb-3">
-                            <!--begin::Icon-->
-                            <div class="d-flex flex-center rounded-circle h-80px w-80px" style="border: 1px dashed rgba(255, 255, 255, 0.4);background-color: #40B876">
-                                <i class="ki-duotone ki-call text-white fs-2qx lh-0">
-                                    <span class="path1"></span>
-                                    <span class="path2"></span>
-                                    <span class="path3"></span>
-                                    <span class="path4"></span>
-                                    <span class="path5"></span>
-                                    <span class="path6"></span>
-                                    <span class="path7"></span>
-                                    <span class="path8"></span>
-                                </i>
-                            </div>
-                            <!--end::Icon-->
-                        </div>
-                        <!--end::Header-->
-                        <!--begin::Card body-->
-                        <div class="card-body d-flex align-items-end mb-3">
-                            <!--begin::Info-->
-                            <div class="d-flex align-items-center">
-                                <span class="fs-3hx text-white fw-bold me-6">{{ $userCount }}</span>
-                                {{-- <div class="fw-bold fs-6 text-white">
-									<span class="d-block">Outbound</span>
-									<span class="">Calls</span>
-								</div> --}}
-                            </div>
-                            <!--end::Info-->
-                        </div>
-                        <!--end::Card body-->
-                        <!--begin::Card footer-->
-                        <div class="card-footer" style="border-top: 1px solid rgba(255, 255, 255, 0.3);background: rgba(0, 0, 0, 0.15);">
-                            <!--begin::Progress-->
-                            <div class="fw-bold text-white py-2">
-                                <span class="fs-1 d-block">Jumlah Pengguna</span>
-                                {{-- <span class="opacity-50">Service</span> --}}
-                            </div>
-                            <!--end::Progress-->
-                        </div>
-                        <!--end::Card footer-->
-                    </div>
-                    <!--end::Card widget 3-->
-                </div>
-                <!--end::Col-->
-                <!--begin::Col-->
-                <div class="col-xl-3">
-                    <!--begin::Card widget 3-->
-                    <div class="card card-flush bgi-no-repeat bgi-size-contain bgi-position-x-end h-xl-100" style="background-color: #7239EA;background-image:url('assets/media/svg/shapes/wave-bg-purple.svg')">
-                        <!--begin::Header-->
-                        <div class="card-header pt-5 mb-3">
-                            <!--begin::Icon-->
-                            <div class="d-flex flex-center rounded-circle h-80px w-80px" style="border: 1px dashed rgba(255, 255, 255, 0.4);background-color: #7239EA">
-                                <i class="ki-duotone ki-call text-white fs-2qx lh-0">
-                                    <span class="path1"></span>
-                                    <span class="path2"></span>
-                                    <span class="path3"></span>
-                                    <span class="path4"></span>
-                                    <span class="path5"></span>
-                                    <span class="path6"></span>
-                                    <span class="path7"></span>
-                                    <span class="path8"></span>
-                                </i>
-                            </div>
-                            <!--end::Icon-->
-                        </div>
-                        <!--end::Header-->
-                        <!--begin::Card body-->
-                        <div class="card-body d-flex align-items-end mb-3">
-                            <!--begin::Info-->
-                            <div class="d-flex align-items-center">
-                                <span class="fs-3hx text-white fw-bold me-6">{{ $kegiatanCount }}</span>
-                                {{-- <div class="fw-bold fs-6 text-white">
-									<span class="d-block">Outbound</span>
-									<span class="">Calls</span>
-								</div> --}}
-                            </div>
-                            <!--end::Info-->
-                        </div>
-                        <!--end::Card body-->
-                        <!--begin::Card footer-->
-                        <div class="card-footer" style="border-top: 1px solid rgba(255, 255, 255, 0.3);background: rgba(0, 0, 0, 0.15);">
-                            <!--begin::Progress-->
-                            <div class="fw-bold text-white py-2">
-                                <span class="fs-1 d-block">Kegiatan Bulan Ini</span>
-                                {{-- <span class="opacity-50">Service</span> --}}
-                            </div>
-                            <!--end::Progress-->
-                        </div>
-                        <!--end::Card footer-->
-                    </div>
-                    <!--end::Card widget 3-->
-                </div>
-                <!--end::Col-->
-                <!--begin::Col-->
-                <div class="col-xl-3">
+                <div class="col-xl-4">
                     <!--begin::Card widget 3-->
                     <div class="card card-flush bgi-no-repeat bgi-size-contain bgi-position-x-end h-xl-100" style="background-color: #3E97FF;background-image:url('assets/media/svg/shapes/wave-bg-purple.svg')">
                         <!--begin::Header-->
@@ -214,7 +70,7 @@
                         <div class="card-body d-flex align-items-end mb-3">
                             <!--begin::Info-->
                             <div class="d-flex align-items-center">
-                                <span class="fs-3hx text-white fw-bold me-6">{{ $userActiveTodayCount }}</span>
+                                <span class="fs-3hx text-white fw-bold me-6">{{ count($organisasiDiikuti) }}</span>
                                 {{-- <div class="fw-bold fs-6 text-white">
 									<span class="d-block">Outbound</span>
 									<span class="">Calls</span>
@@ -227,7 +83,55 @@
                         <div class="card-footer" style="border-top: 1px solid rgba(255, 255, 255, 0.3);background: rgba(0, 0, 0, 0.15);">
                             <!--begin::Progress-->
                             <div class="fw-bold text-white py-2">
-                                <span class="fs-1 d-block">Pengguna Sedang Aktif</span>
+                                <span class="fs-1 d-block">Organisasi Diikuti</span>
+                                {{-- <span class="opacity-50">Service</span> --}}
+                            </div>
+                            <!--end::Progress-->
+                        </div>
+                        <!--end::Card footer-->
+                    </div>
+                    <!--end::Card widget 3-->
+                </div>
+                <!--end::Col-->
+                <div class="col-xl-4">
+                    <!--begin::Card widget 3-->
+                    <div class="card card-flush bgi-no-repeat bgi-size-contain bgi-position-x-end h-xl-100" style="background-color: #3E97FF;background-image:url('assets/media/svg/shapes/wave-bg-purple.svg')">
+                        <!--begin::Header-->
+                        <div class="card-header pt-5 mb-3">
+                            <!--begin::Icon-->
+                            <div class="d-flex flex-center rounded-circle h-80px w-80px" style="border: 1px dashed rgba(255, 255, 255, 0.4);background-color: #3E97FF">
+                                <i class="ki-duotone ki-call text-white fs-2qx lh-0">
+                                    <span class="path1"></span>
+                                    <span class="path2"></span>
+                                    <span class="path3"></span>
+                                    <span class="path4"></span>
+                                    <span class="path5"></span>
+                                    <span class="path6"></span>
+                                    <span class="path7"></span>
+                                    <span class="path8"></span>
+                                </i>
+                            </div>
+                            <!--end::Icon-->
+                        </div>
+                        <!--end::Header-->
+                        <!--begin::Card body-->
+                        <div class="card-body d-flex align-items-end mb-3">
+                            <!--begin::Info-->
+                            <div class="d-flex align-items-center">
+                                <span class="fs-3hx text-white fw-bold me-6">{{ count($kegiatanSaya) }}</span>
+                                {{-- <div class="fw-bold fs-6 text-white">
+									<span class="d-block">Outbound</span>
+									<span class="">Calls</span>
+								</div> --}}
+                            </div>
+                            <!--end::Info-->
+                        </div>
+                        <!--end::Card body-->
+                        <!--begin::Card footer-->
+                        <div class="card-footer" style="border-top: 1px solid rgba(255, 255, 255, 0.3);background: rgba(0, 0, 0, 0.15);">
+                            <!--begin::Progress-->
+                            <div class="fw-bold text-white py-2">
+                                <span class="fs-1 d-block">Kegiatan Diikuti</span>
                                 {{-- <span class="opacity-50">Service</span> --}}
                             </div>
                             <!--end::Progress-->
@@ -292,37 +196,97 @@
                 </div> --}}
                 <!--end::Col-->
             </div>
-            <div class="row g-5 g-xl-8">
-                <div class="col-xl-12">
-                    <!--begin::Charts Widget 3-->
-                    <div class="card card-xl-stretch mb-xl-8">
-                        <!--begin::Header-->
-                        <div class="card-header border-0 pt-5">
-                            <h3 class="card-title align-items-start flex-column">
-                                <span class="card-label fw-bold fs-3 mb-1">Recent Chart</span>
-                                {{-- <span class="text-muted fw-semibold fs-7">More than 1000 new records</span> --}}
-                            </h3>
-                            <!--begin::Toolbar-->
-                            {{-- <div class="card-toolbar" data-kt-buttons="true">
-                                <a class="btn btn-sm btn-color-muted btn-active btn-active-primary active px-4 me-1" id="kt_charts_widget_3_year_btn">Year</a>
-                                <a class="btn btn-sm btn-color-muted btn-active btn-active-primary px-4 me-1" id="kt_charts_widget_3_month_btn">Month</a>
-                                <a class="btn btn-sm btn-color-muted btn-active btn-active-primary px-4" id="kt_charts_widget_3_week_btn">Week</a>
-                            </div> --}}
-                            <!--end::Toolbar-->
+        
+            <!--end::Row-->
+            <div class="row g-5 g-xl-10 mb-5 mb-xl-10">
+                @forelse($pengumumanSaya as $pengumuman)
+                    <div class="col-xl-4 col-md-6 mb-4">
+                        <div class="card shadow-sm border-0 h-100" style="border-radius: 1rem;">
+                            <div class="card-body d-flex flex-column justify-content-between" style="background: #fff; border-radius: 1rem;">
+                                <span class="badge bg-light text-primary mb-2">{{ \Carbon\Carbon::parse($pengumuman->tanggal_post)->format('d M Y') }}</span>
+                                <h4 class="fw-bold text-dark mb-2">{{ $pengumuman->judul }}</h4>
+                                <p class="text-gray-700 mb-0" style="min-height: 60px;">{{ Str::limit($pengumuman->isi, 100) }}</p>
+                                <span class="text-muted fs-7 mt-3">Diposting: {{ \Carbon\Carbon::parse($pengumuman->created_at)->diffForHumans() }} {{ $pengumuman->organisasi->nama_organisasi }}</span>
+                            </div>
                         </div>
-                        <!--end::Header-->
-                        <!--begin::Body-->
-                        <div class="card-body">
-                            <!--begin::Chart-->
-                            <div id="kt_charts_widget_3_chart" style="height: 350px"></div>
-                            <!--end::Chart-->
-                        </div>
-                        <!--end::Body-->
                     </div>
-                    <!--end::Charts Widget 3-->
+                @empty
+                    <div class="col-12">
+                        <div class="alert alert-info text-center mb-0">
+                            Belum ada pengumuman.
+                        </div>
+                    </div>
+                @endforelse
+            </div>
+            <div class="row g-5 g-xl-10 mb-5 mb-xl-10">
+                <!-- Organisasi Diikuti -->
+                <div class="col-xl-6">
+                    <div class="card card-flush h-100">
+                        <div class="card-header pt-5">
+                            <h3 class="card-title fw-bold text-dark">Organisasi Diikuti</h3>
+                        </div>
+                        <div class="card-body pt-3">
+                            <div class="table-responsive">
+                                <table class="table table-row-dashed align-middle gs-0 gy-3">
+                                    <thead>
+                                        <tr class="fw-bold text-gray-400">
+                                            <th class="min-w-150px">Nama Organisasi</th>
+                                            
+                                            <th class="min-w-100px">Bergabung Sejak</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @forelse($organisasiDiikuti as $org)
+                                            <tr>
+                                                <td>{{ $org->organisasi->nama_organisasi ?? '-' }}</td>
+                                                
+                                                <td>{{ \Carbon\Carbon::parse($org->pivot->created_at ?? $org->created_at)->format('d M Y') }}</td>
+                                            </tr>
+                                        @empty
+                                            <tr>
+                                                <td colspan="3" class="text-center text-muted">Belum mengikuti organisasi.</td>
+                                            </tr>
+                                        @endforelse
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Kegiatan Diikuti -->
+                <div class="col-xl-6">
+                    <div class="card card-flush h-100">
+                        <div class="card-header pt-5">
+                            <h3 class="card-title fw-bold text-dark">Kegiatan Diikuti</h3>
+                        </div>
+                        <div class="card-body pt-3">
+                            <div class="table-responsive">
+                                <table class="table table-row-dashed align-middle gs-0 gy-3">
+                                    <thead>
+                                        <tr class="fw-bold text-gray-400">
+                                            <th class="min-w-150px">Nama Kegiatan</th>
+                                            <th class="min-w-100px">Tanggal</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @forelse($kegiatanSaya as $kegiatan)
+                                            <tr>
+                                                <td>{{ $kegiatan->kegiatan->nama_kegiatan ?? '-' }}</td>
+                                                
+                                                <td>{{ \Carbon\Carbon::parse($kegiatan->tanggal_mulai ?? $kegiatan->created_at)->format('d M Y') }}</td>
+                                            </tr>
+                                        @empty
+                                            <tr>
+                                                <td colspan="3" class="text-center text-muted">Belum mengikuti kegiatan.</td>
+                                            </tr>
+                                        @endforelse
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <!--end::Row-->
             <!--begin::Row-->
             {{-- <div class="row g-5 g-xl-10 mb-5 mb-xl-10">
 				<!--begin::Col-->

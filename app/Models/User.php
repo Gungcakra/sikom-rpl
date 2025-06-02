@@ -46,4 +46,12 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+    public function anggota()
+    {
+        return $this->hasMany(Anggota::class, 'id_user', 'id');
+    }
+    public function loginLogs()
+    {
+        return $this->hasMany(LoginLog::class, 'id_user', 'id');
+    }
 }

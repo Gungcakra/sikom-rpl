@@ -3107,7 +3107,7 @@
                                     </i>
                                     <!--end::Icon-->
                                     <!--begin::Input-->
-                                    <input type="text" class="search-input form-control form-control-flush ps-10" name="search" value="" placeholder="Search..." data-kt-search-element="input" />
+                                    <input type="text" class="search-input form-control form-control-flush ps-10" name="search" value="" placeholder="Cari..." data-kt-search-element="input" />
                                     <!--end::Input-->
                                     <!--begin::Spinner-->
                                     <span class="search-spinner position-absolute top-50 end-0 translate-middle-y lh-0 d-none me-1" data-kt-search-element="spinner">
@@ -4570,7 +4570,7 @@
                 <div class="app-navbar-item ms-1 ms-md-4" id="kt_header_user_menu_toggle">
                     <!--begin::Menu wrapper-->
                     <div class="cursor-pointer symbol symbol-35px" data-kt-menu-trigger="{default: 'click', lg: 'hover'}" data-kt-menu-attach="parent" data-kt-menu-placement="bottom-end">
-                        <img src="{{ asset('assets/media/avatars/300-3.jpg')}}" class="rounded-3" alt="user" />
+                        <img src="{{ asset('assets/media/avatars/blank.png')}}" class="rounded-3" alt="user" />
                     </div>
                     <!--begin::User account menu-->
                     <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-800 menu-state-bg menu-state-color fw-semibold py-4 fs-6 w-275px" data-kt-menu="true">
@@ -4579,7 +4579,7 @@
                             <div class="menu-content d-flex align-items-center px-3">
                                 <!--begin::Avatar-->
                                 <div class="symbol symbol-50px me-5">
-                                    <img alt="Logo" src="{{ asset('assets/media/avatars/300-3.jpg')}}" />
+                                    <img alt="Logo" src="{{ asset('assets/media/avatars/blank.png')}}" />
                                 </div>
                                 <!--end::Avatar-->
                                 <!--begin::Username-->

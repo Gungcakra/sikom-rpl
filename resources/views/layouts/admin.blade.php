@@ -109,7 +109,7 @@
             Livewire.on('delete-success', (message) => {
                 Swal.fire("Deleted!", message, "success");
             });
-
+            
             Livewire.on('error', (message) => {
                 toastr.error(message);
             });

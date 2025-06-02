@@ -12,7 +12,7 @@
                 <ul class="breadcrumb breadcrumb-separatorless fw-semibold fs-7 my-0 pt-1">
                     <!--begin::Item-->
                     <li class="breadcrumb-item text-muted">
-                        <a href="{{ route('dashboard') }}" class="text-muted text-hover-primary">Home</a>
+                        <a href="{{ route('dashboard') }}" class="text-muted text-hover-primary" wire:navigate>Home</a>
                     </li>
                     <!--end::Item-->
                     <!--begin::Item-->
@@ -33,7 +33,7 @@
                 {{-- <a href="#" class="btn btn-sm fw-bold btn-secondary" data-bs-toggle="modal" data-bs-target="#kt_modal_create_app">Rollover</a> --}}
                 <!--end::Secondary button-->
                 <!--begin::Primary button-->
-                <button class="btn btn-sm fw-bold btn-primary" wire:click="create()">Add Role</button>
+                <button class="btn btn-sm fw-bold btn-primary" wire:click="create()">Tambah Role</button>
                 <button class="btn btn-sm fw-bold btn-primary" wire:click="createPermission()">Add Permission</button>
                 <!--end::Primary button-->
             </div>
@@ -134,7 +134,7 @@
                             type="text"
                             data-kt-customer-table-filter="search"
                             class="form-control form-control-solid w-250px ps-12"
-                            placeholder="Search Permission Name"
+                            placeholder="Cari Permission Name"
                             wire:model.live.debounce.100ms="search"
                         />
                     </div>
@@ -145,14 +145,14 @@
                         <thead>
                             <tr class="fw-semibold fs-6 text-muted">
                                 <th>No</th>
-                                <th>Action</th>
+                                <th>Aksi</th>
                                 <th>Name</th>
                             </tr>
                         </thead>
                         <tbody>
         
                             @if (count($permissionData) < 1) <tr>
-                                <td colspan="6" class="text-center">No Data Found</td>
+                                <td colspan="6" class="text-center">Tidak Ada Data</td>
                                 </tr>
                                 @else
                                 @foreach ( $permissionData as $index => $permission)
