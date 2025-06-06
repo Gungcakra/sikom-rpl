@@ -184,6 +184,8 @@
                 title: message
                 , showCancelButton: true
                 , confirmButtonText: "Ya"
+,
+                confirmButtonColor: "#d33"
                 , cancelButtonText: "Tidak"
                 , icon: "warning"
             }).then((result) => {

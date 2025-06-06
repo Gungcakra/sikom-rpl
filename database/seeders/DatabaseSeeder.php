@@ -40,6 +40,7 @@ class DatabaseSeeder extends Seeder
             'masterdata-pengurus',
             'masterdata-kegiatan',
             'masterdata-daftar-kegiatan-online',
+            'masterdata-bank',
             'masterdata-transaksi-keuangan',
             'masterdata-pengumuman',
             'masterdata-laporan-kegiatan',
@@ -55,27 +56,41 @@ class DatabaseSeeder extends Seeder
         }
 
         // Assign permissions to roles
-        $admin->syncPermissions($permissions);
-
-        $pengurus->syncPermissions([
+        $admin->syncPermissions([
             'dashboard',
             'masterdata-organisasi',
             'masterdata-anggota',
             'masterdata-pengurus',
             'masterdata-kegiatan',
-            'masterdata-daftar-kegiatan-online',
+            'masterdata-pengumuman',
+            'masterdata-laporan-kegiatan',
+            'masterdata-laporan-keuangan',
+            'masterdata-user',
+            // 'masterdata-role',
+            // 'masterdata-menu',
+            // 'masterdata-bank',
+            'masterdata-departement',
+        ]);
+
+        $pengurus->syncPermissions([
+            'dashboard',
+            // 'masterdata-organisasi',
+            'masterdata-anggota',
+            'masterdata-pengurus',
+            'masterdata-kegiatan',
             'masterdata-transaksi-keuangan',
             'masterdata-pengumuman',
             'masterdata-laporan-kegiatan',
             'masterdata-laporan-keuangan',
-            'masterdata-menu',
+            'masterdata-bank',
+            // 'masterdata-menu',
             'masterdata-departement',
         ]);
 
         $anggota->syncPermissions([
             'dashboard',
             'masterdata-daftar-kegiatan-online',
-            
+
         ]);
 
         // Create users for each role
@@ -183,16 +198,23 @@ class DatabaseSeeder extends Seeder
         ]);
         SubMenu::create([
             'menu_id' => $masterData->id,
+            'name' => 'Bank',
+            'route' => 'bank',
+            'order' => 5,
+            'permission_id' => Permission::where('name', 'masterdata-bank')->first()->id
+        ]);
+        SubMenu::create([
+            'menu_id' => $masterData->id,
             'name' => 'Transaksi Keuangan',
             'route' => 'transaksi-keuangan',
-            'order' => 5,
+            'order' => 6,
             'permission_id' => Permission::where('name', 'masterdata-transaksi-keuangan')->first()->id
         ]);
         SubMenu::create([
             'menu_id' => $masterData->id,
             'name' => 'Pengumuman',
             'route' => 'pengumuman',
-            'order' => 6,
+            'order' => 7,
             'permission_id' => Permission::where('name', 'masterdata-pengumuman')->first()->id
         ]);
 
@@ -221,22 +243,22 @@ class DatabaseSeeder extends Seeder
         // Seed organisasi
         \App\Models\Organisasi::insert([
             [
-            'nama_organisasi' => 'Progress',
-            'jenis' => 'UKM',
-            'deskripsi' => 'Unit Kegiatan Mahasiswa Progress',
-            'tahun_berdiri' => 2010,
+                'nama_organisasi' => 'Progress',
+                'jenis' => 'UKM',
+                'deskripsi' => 'Unit Kegiatan Mahasiswa Progress',
+                'tahun_berdiri' => 2010,
             ],
             [
-            'nama_organisasi' => 'Syntax',
-            'jenis' => 'UKM',
-            'deskripsi' => 'Unit Kegiatan Mahasiswa Syntax',
-            'tahun_berdiri' => 2012,
+                'nama_organisasi' => 'Syntax',
+                'jenis' => 'UKM',
+                'deskripsi' => 'Unit Kegiatan Mahasiswa Syntax',
+                'tahun_berdiri' => 2012,
             ],
             [
-            'nama_organisasi' => 'Himatography',
-            'jenis' => 'UKM',
-            'deskripsi' => 'Unit Kegiatan Mahasiswa Himatography',
-            'tahun_berdiri' => 2015,
+                'nama_organisasi' => 'Himatography',
+                'jenis' => 'UKM',
+                'deskripsi' => 'Unit Kegiatan Mahasiswa Himatography',
+                'tahun_berdiri' => 2015,
             ],
         ]);
         // Create user accounts for each anggota
@@ -267,21 +289,25 @@ class DatabaseSeeder extends Seeder
         $organisasi3 = \App\Models\Organisasi::where('nama_organisasi', 'Himatography')->first();
 
         // Setiap user menjadi anggota di ketiga organisasi
-        foreach ([[$anggota1, 'Anggota Satu', '210001', 'Teknik Informatika'],
-              [$anggota2, 'Anggota Dua', '210002', 'Sistem Informasi'],
-              [$anggota3, 'Anggota Tiga', '210003', 'Teknik Komputer']] as $data) {
+        foreach (
+            [
+                [$anggota1, 'Anggota Satu', '210001', 'Teknik Informatika'],
+                [$anggota2, 'Anggota Dua', '210002', 'Sistem Informasi'],
+                [$anggota3, 'Anggota Tiga', '210003', 'Teknik Komputer']
+            ] as $data
+        ) {
             [$user, $nama, $nim, $prodi] = $data;
             foreach ([$organisasi1, $organisasi2, $organisasi3] as $org) {
-            \App\Models\Anggota::create([
-                'id_user' => $user->id,
-                'id_organisasi' => $org->id_organisasi,
-                'nama' => $nama,
-                'nim' => $nim,
-                'no_hp' => '08' . rand(1000000000, 9999999999),
-                'prodi' => $prodi,
-                'tanggal_gabung' => now(),
-                'status_keanggotaan' => 'aktif',
-            ]);
+                \App\Models\Anggota::create([
+                    'id_user' => $user->id,
+                    'id_organisasi' => $org->id_organisasi,
+                    'nama' => $nama,
+                    'nim' => $nim,
+                    'no_hp' => '08' . rand(1000000000, 9999999999),
+                    'prodi' => $prodi,
+                    'tanggal_gabung' => now(),
+                    'status_keanggotaan' => 'aktif',
+                ]);
             }
         }
 
@@ -289,37 +315,37 @@ class DatabaseSeeder extends Seeder
         // kegiatan
         \App\Models\Kegiatan::insert([
             [
-            'id_organisasi' => $organisasi1->id_organisasi,
-            'nama_kegiatan' => 'Pelatihan Pemrograman',
-            'deskripsi' => 'Pelatihan dasar pemrograman untuk anggota baru.',
-            'tanggal_pelaksanaan' => now()->addDays(7)->toDateString(),
-            'kuota_peserta' => 50,
-            'lokasi' => 'Lab Komputer Progress',
-            'status' => 'aktif',
-            'created_at' => now(),
-            'updated_at' => now(),
+                'id_organisasi' => $organisasi1->id_organisasi,
+                'nama_kegiatan' => 'Pelatihan Pemrograman',
+                'deskripsi' => 'Pelatihan dasar pemrograman untuk anggota baru.',
+                'tanggal_pelaksanaan' => now()->addDays(7)->toDateString(),
+                'kuota_peserta' => 50,
+                'lokasi' => 'Lab Komputer Progress',
+                'status' => 'aktif',
+                'created_at' => now(),
+                'updated_at' => now(),
             ],
             [
-            'id_organisasi' => $organisasi2->id_organisasi,
-            'nama_kegiatan' => 'Workshop Desain Grafis',
-            'deskripsi' => 'Workshop desain grafis untuk anggota.',
-            'tanggal_pelaksanaan' => now()->addDays(14)->toDateString(),
-            'kuota_peserta' => 40,
-            'lokasi' => 'Ruang Multimedia Syntax',
-            'status' => 'aktif',
-            'created_at' => now(),
-            'updated_at' => now(),
+                'id_organisasi' => $organisasi2->id_organisasi,
+                'nama_kegiatan' => 'Workshop Desain Grafis',
+                'deskripsi' => 'Workshop desain grafis untuk anggota.',
+                'tanggal_pelaksanaan' => now()->addDays(14)->toDateString(),
+                'kuota_peserta' => 40,
+                'lokasi' => 'Ruang Multimedia Syntax',
+                'status' => 'aktif',
+                'created_at' => now(),
+                'updated_at' => now(),
             ],
             [
-            'id_organisasi' => $organisasi3->id_organisasi,
-            'nama_kegiatan' => 'Seminar Teknologi Informasi',
-            'deskripsi' => 'Seminar tentang perkembangan teknologi informasi terkini.',
-            'tanggal_pelaksanaan' => now()->addDays(21)->toDateString(),
-            'kuota_peserta' => 100,
-            'lokasi' => 'Aula Himatography',
-            'status' => 'aktif',
-            'created_at' => now(),
-            'updated_at' => now(),
+                'id_organisasi' => $organisasi3->id_organisasi,
+                'nama_kegiatan' => 'Seminar Teknologi Informasi',
+                'deskripsi' => 'Seminar tentang perkembangan teknologi informasi terkini.',
+                'tanggal_pelaksanaan' => now()->addDays(21)->toDateString(),
+                'kuota_peserta' => 100,
+                'lokasi' => 'Aula Himatography',
+                'status' => 'aktif',
+                'created_at' => now(),
+                'updated_at' => now(),
             ],
         ]);
     }

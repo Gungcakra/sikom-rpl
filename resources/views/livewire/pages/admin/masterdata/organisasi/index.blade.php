@@ -110,7 +110,7 @@
                                         <!--end::Menu item-->
                                         <!--begin::Menu item-->
                                         <div class="menu-item px-3">
-                                            <a href="#" class="menu-link px-3 w-100" data-kt-ecommerce-product-filter="delete_row" wire:click="delete({{ $organisasi->id_organisasi }})">Delete</a>
+                                            <a href="#" class="menu-link px-3 w-100" data-kt-ecommerce-product-filter="delete_row" wire:click="delete({{ $organisasi->id_organisasi }})">Hapus</a>
                                         </div>
                                         <!--end::Menu item-->
                                     </div>
@@ -170,14 +170,16 @@
         Swal.fire({
             title: message
             , showCancelButton: true
-            , confirmButtonText: "Yes"
-            , cancelButtonText: "No"
+            , confirmButtonText: "Ya"
+,
+                confirmButtonColor: "#d33"
+            , cancelButtonText: "Tidak"
             , icon: "warning"
         }).then((result) => {
             if (result.isConfirmed) {
                 Livewire.dispatch('deleteOrganisasi');
             } else {
-                Swal.fire("Cancelled", "Delete Cancelled.", "info");
+                Swal.fire("Aksi Dibatalkan", "Batal Menghapus.", "info");
             }
         });
     });

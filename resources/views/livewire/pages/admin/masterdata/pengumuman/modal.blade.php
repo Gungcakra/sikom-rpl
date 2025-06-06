@@ -54,6 +54,7 @@
                     </div>
                 </div>
 
+                @if(Auth::user()->roles->pluck('name')->first() == 'admin')
                 <div class="row g-9 mb-8">
                     <div class="d-flex flex-column col-md-6 mb-8 fv-row">
                         <!--begin::Label-->
@@ -68,14 +69,15 @@
                             </span>
                         </label>
                         <!--end::Label-->
-                        <select class="form-select @error('id_organisasi') is-invalid @enderror text-dark"  data-control="select2" data-placeholder="Pilih Organisasi" wire:model="id_organisasi" data-dropdown-parent="#pengumumanModal">
+                        <select class="form-select @error('id_organisasi') is-invalid @enderror text-dark" data-control="select2" data-placeholder="Pilih Organisasi" wire:model="id_organisasi" data-dropdown-parent="#pengumumanModal">
                             <option value="">Pilih Organisasi</option>
                             @foreach ($organisasi as $organisasi)
-                                <option value="{{ $organisasi->id_organisasi }}">{{ $organisasi->nama_organisasi }}</option>
+                            <option value="{{ $organisasi->id_organisasi }}">{{ $organisasi->nama_organisasi }}</option>
                             @endforeach
                         </select>
                         @error('id_organisasi') <div class="invalid-feedback">{{ $message }}</div> @enderror
                     </div>
+
                     {{-- <div class="d-flex flex-column col-md-6 mb-8 fv-row">
                         <!--begin::Label-->
                         <label class="d-flex align-items-center fs-6 fw-semibold mb-2">
@@ -90,19 +92,22 @@
                         </label>
                         <!--end::Label-->
                         <input type="date" class="form-control form-control-solid @error('tanggal_post') is-invalid @enderror" id="tanggal_post" wire:model="tanggal_post" />
-                        @error('tanggal_post') <div class="invalid-feedback">{{ $message }}</div> @enderror
-                    </div> --}}
-                </div>
-                <!--end::Input group-->
-
-
-            </div>
-
-            <div class="modal-footer">
-                <button type="button" class="btn btn-light" data-bs-dismiss="modal" aria-label="Close" wire:click="closeModal">Close</button>
-                <button class="btn btn-primary" wire:click="{{ isset($idPengumuman) ? 'update' : 'store' }}">{{ $idPengumuman ? 'Update' : 'Store' }}</button>
-
-            </div>
+                        @error('tanggal_post') <div class="invalid-feedback">{{ $message }}
+                </div> @enderror
+            </div> --}}
         </div>
+        @else
+        @endif
+        <!--end::Input group-->
+
+
     </div>
+
+    <div class="modal-footer">
+        <button type="button" class="btn btn-light" data-bs-dismiss="modal" aria-label="Close" wire:click="closeModal">Close</button>
+        <button class="btn btn-primary" wire:click="{{ isset($idPengumuman) ? 'update' : 'store' }}">{{ $idPengumuman ? 'Update' : 'Store' }}</button>
+
+    </div>
+</div>
+</div>
 </div>

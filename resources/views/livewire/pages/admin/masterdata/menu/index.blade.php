@@ -76,11 +76,11 @@
                                         <!--end::Menu item-->
                                         <!--begin::Menu item-->
                                         <div class="menu-item px-3">
-                                            <a href="#" class="menu-link px-3 w-100" data-kt-ecommerce-product-filter="delete_row" wire:click="delete({{ $menu->id }})">Delete</a>
+                                            <a href="#" class="menu-link px-3 w-100" data-kt-ecommerce-product-filter="delete_row" wire:click="delete({{ $menu->id }})">Hapus</a>
                                         </div>
     
                                         <div class="menu-item px-3">
-                                            <a class="menu-link px-3 w-100" wire:click="createSubMenu({{ $menu->id }})">Add SubMenu</a>
+                                            <a class="menu-link px-3 w-100" wire:click="createSubMenu({{ $menu->id }})">Tambah SubMenu</a>
                                         </div>
                                 </td>
                                 <td>{{ $menu->name }}</td>
@@ -109,7 +109,7 @@
                                         </div>
     
                                         <div class="menu-item px-3">
-                                            <a class="menu-link px-3 w-100" wire:click="deleteSubMenu({{ $submenu->id }})">Delete</a>
+                                            <a class="menu-link px-3 w-100" wire:click="deleteSubMenu({{ $submenu->id }})">Hapus</a>
                                         </div>
                                 </td>
                                 <td>— {{ $submenu->name }}</td>
@@ -192,14 +192,16 @@
             Swal.fire({
                 title: message
                 , showCancelButton: true
-                , confirmButtonText: "Yes"
-                , cancelButtonText: "No"
+                , confirmButtonText: "Ya"
+,
+                confirmButtonColor: "#d33"
+                , cancelButtonText: "Tidak"
                 , icon: "warning"
             }).then((result) => {
                 if (result.isConfirmed) {
                     Livewire.dispatch('deleteMenu');
                 } else {
-                    Swal.fire("Cancelled", "Delete Cancelled.", "info");
+                    Swal.fire("Aksi Dibatalkan", "Batal Menghapus.", "info");
                 }
             });
         });
@@ -208,8 +210,10 @@
             Swal.fire({
                 title: message
                 , showCancelButton: true
-                , confirmButtonText: "Yes"
-                , cancelButtonText: "No"
+                , confirmButtonText: "Ya"
+,
+                confirmButtonColor: "#d33"
+                , cancelButtonText: "Tidak"
                 , icon: "warning"
             }).then((result) => {
                 if (result.isConfirmed) {

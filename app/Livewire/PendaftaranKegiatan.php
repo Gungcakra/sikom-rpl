@@ -27,7 +27,7 @@ class PendaftaranKegiatan extends Component
                 ->where('id_organisasi', $idOrganisasiKegiatan)
                 ->pluck('id_anggota')
                 ->first();
-                
+
             // Cek apakah user sudah mendaftar pada kegiatan ini
             $sudahDaftar = \App\Models\PendaftaranKegiatan::where('id_kegiatan', $id)
                 ->where('id_anggota', $getIdAnggotaOrganisasi ?? null)

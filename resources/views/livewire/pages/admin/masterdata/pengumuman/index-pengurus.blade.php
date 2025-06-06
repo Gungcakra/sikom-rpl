@@ -1,5 +1,5 @@
 <div class="d-flex flex-column flex-column-fluid">
-    <x-slot:title>Manajemen Anggota</x-slot:title>
+    <x-slot:title>Manajemen Pengumuman</x-slot:title>
     <!--begin::Toolbar-->
     <div id="kt_app_toolbar" class="app-toolbar py-3 py-lg-6">
         <!--begin::Toolbar container-->
@@ -7,7 +7,7 @@
             <!--begin::Page title-->
             <div class="page-title d-flex flex-column justify-content-center flex-wrap me-3">
                 <!--begin::Title-->
-                <h1 class="page-heading d-flex text-dark fw-bold fs-3 flex-column justify-content-center my-0">Manajemen Anggota</h1>
+                <h1 class="page-heading d-flex text-dark fw-bold fs-3 flex-column justify-content-center my-0">Manajemen Pengumuman</h1>
                 <!--end::Title-->
                 <!--begin::Breadcrumb-->
                 <ul class="breadcrumb breadcrumb-separatorless fw-semibold fs-7 my-0 pt-1">
@@ -22,13 +22,13 @@
                     </li>
                     <!--end::Item-->
                     <!--begin::Item-->
-                    <li class="breadcrumb-item text-muted">Anggota</li>
+                    <li class="breadcrumb-item text-muted">Pengumuman</li>
                     <!--end::Item-->
                 </ul>
                 <!--end::Breadcrumb-->
             </div>
             <div class="d-flex items-center">
-                {{-- <input type="text" class="form-control form-control-solid" placeholder="Cari Anggota Name" id="search" autocomplete="off" wire:model.live.debounce.100ms="search" /> --}}
+                {{-- <input type="text" class="form-control form-control-solid" placeholder="Cari Pengumuman Name" id="search" autocomplete="off" wire:model.live.debounce.100ms="search" /> --}}
 
                 {{-- <select class="form-select" data-control="select2" data-placeholder="Select Customer" name="departement_id" id="departement_id" onchange="@this.set('selectedDepartement', this.value)">
                     <option>Select Departement</option>
@@ -47,7 +47,7 @@
                 {{-- <a href="#" class="btn btn-sm fw-bold btn-secondary" data-bs-toggle="modal" data-bs-target="#kt_modal_create_app">Rollover</a> --}}
                 <!--end::Secondary button-->
                 <!--begin::Primary button-->
-                {{-- <button class="btn btn-sm fw-bold btn-primary" wire:click="create()">Tambah Anggota</button> --}}
+                <button class="btn btn-sm fw-bold btn-primary" wire:click="create()">Tambah Pengumuman</button>
                 <!--end::Primary button-->
             </div>
             <!--end::Actions-->
@@ -71,7 +71,7 @@
                             type="text"
                             data-kt-customer-table-filter="search"
                             class="form-control form-control-solid w-250px ps-12"
-                            placeholder="Cari Anggota"
+                            placeholder="Cari Pengumuman"
                             wire:model.live.debounce.100ms="search"
                         />
                     </div>
@@ -83,65 +83,54 @@
                             <tr class="fw-semibold fs-6 text-muted">
                                 <th>No</th>
                                 <th>Aksi</th>
-                                <th>Nama</th>
-                                <th>NIM</th>
-                                <th>No HP</th>
-                                <th>Prodi</th>
-                                <th>Organisasi</th>
-                                <th>Tanggal Gabung</th>
-                                <th>Status Keanggotaan</th>
+                                <th>Judul</th>
+                                <th>Isi</th>
+                                <th>Tanggal Post</th>
+                                {{-- <th>Organisasi</th> --}}
                             </tr>
                         </thead>
                         <tbody>
                             @if (count($data) < 1)
                             <tr>
-                                <td colspan="9" class="text-center">Tidak Ada Data</td>
+                                <td colspan="6" class="text-center">Tidak Ada Data</td>
                             </tr>
                             @else
-                            @foreach ($data as $index => $Anggota)
-                            <tr wire:key="Anggota-{{ $Anggota->id_anggota }}">
+                            @foreach ($data as $index => $pengumuman)
+                            <tr wire:key="Pengumuman-{{ $pengumuman->id_pengumuman }}">
                                 <td>{{ $index + 1 }}</td>
                                 <td>
                                     <a href="#" class="btn btn-sm btn-light btn-flex btn-center btn-active-light-primary" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">Aksi
-                                        <i class="ki-duotone ki-down fs-5 ms-1"></i>
-                                    </a>
+                                        <i class="ki-duotone ki-down fs-5 ms-1"></i></a>
                                     <!--begin::Menu-->
                                     <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-semibold fs-7 w-125px py-4" data-kt-menu="true">
                                         <!--begin::Menu item-->
                                         <div class="menu-item px-3">
-                                            <a wire:click="edit({{ $Anggota->id_anggota }})" class="menu-link px-3 w-100">Edit</a>
+                                            <a wire:click="edit({{ $pengumuman->id_pengumuman }})" class="menu-link px-3 w-100">Edit</a>
                                         </div>
                                         <!--end::Menu item-->
                                         <!--begin::Menu item-->
                                         <div class="menu-item px-3">
-                                            <a href="#" class="menu-link px-3 w-100" data-kt-ecommerce-product-filter="delete_row" wire:click="delete({{ $Anggota->id_anggota }})">Hapus</a>
+                                            <a href="#" class="menu-link px-3 w-100" data-kt-ecommerce-product-filter="delete_row" wire:click="delete({{ $pengumuman->id_pengumuman }})">Hapus</a>
                                         </div>
                                         <!--end::Menu item-->
                                     </div>
                                     <!--end::Menu-->
                                 </td>
-                                <td>{{ $Anggota->nama }}</td>
-                                <td>{{ $Anggota->nim }}</td>
-                                <td>{{ $Anggota->no_hp }}</td>
-                                <td>{{ $Anggota->prodi }}</td>
-                                <td>{{ $Anggota->organisasi->nama_organisasi }}</td>
-                                <td>{{ $Anggota->tanggal_gabung }}</td>
-                                <td>{{ $Anggota->status_keanggotaan }}</td>
-                            
-    
+                                <td>{{ $pengumuman->judul }}</td>
+                                  <td>{{ Str::limit($pengumuman->isi, 50) }}</td>
+                                <td>{{ \Carbon\Carbon::parse($pengumuman->tanggal_post)->translatedFormat('d F Y') }}</td>
+                                {{-- <td>{{ $pengumuman->organisasi->nama_organisasi ?? '-' }}</td> --}}
                             </tr>
                             @endforeach
                             @endif
                         </tbody>
-    
-    
                     </table>
                     <div class="mt-4 d-flex justify-content-center">
                         {{ $data->onEachSide(1)->links() }}
                     </div>
                 </div>
     
-               @include('livewire.pages.admin.masterdata.anggota.modal')
+               @include('livewire.pages.admin.masterdata.pengumuman.modal')
             </div>
 
         </div>
@@ -151,7 +140,7 @@
 <script>
     $(function() {
         Livewire.on('show-modal', () => {
-        var modalEl = document.getElementById('anggotaModal');
+        var modalEl = document.getElementById('pengumumanModal');
         var existingModal = bootstrap.Modal.getInstance(modalEl);
         if (!existingModal) {
             var myModal = new bootstrap.Modal(modalEl, {});
@@ -161,7 +150,7 @@
         }
     });
     Livewire.on('hide-modal', () => {
-        var modalEl = document.getElementById('anggotaModal');
+        var modalEl = document.getElementById('pengumumanModal');
         var modal = bootstrap.Modal.getInstance(modalEl);
         if (modal) {
             modal.hide();
@@ -188,7 +177,7 @@
             , icon: "warning"
         }).then((result) => {
             if (result.isConfirmed) {
-                Livewire.dispatch('deleteEmployee');
+                Livewire.dispatch('deletePengumuman');
             } else {
                 Swal.fire("Aksi Dibatalkan", "Batal Menghapus.", "info");
             }

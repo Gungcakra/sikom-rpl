@@ -4,6 +4,7 @@ namespace App\Livewire;
 
 use App\Models\Kegiatan as ModelsKegiatan;
 use App\Models\Organisasi;
+use App\Models\PendaftaranKegiatan;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Attributes\Layout;
 use Livewire\Component;
@@ -15,7 +16,7 @@ class Kegiatan extends Component
     use WithPagination;
     protected $paginationTheme = 'bootstrap';
 
-    public $id_kegiatan, $id_organisasi, $nama_kegiatan, $deskripsi, $tanggal_pelaksanaan, $kuota_peserta, $lokasi, $status, $idToDelete, $search = '';
+    public $id_kegiatan, $id_organisasi, $nama_kegiatan, $deskripsi, $tanggal_pelaksanaan, $kuota_peserta, $lokasi, $status, $idToDelete, $search = '', $cek_pendaftaran = false, $userRole;
     public $listeners = ['deleteKegiatan'];
 
     public function mount()
@@ -28,6 +29,12 @@ class Kegiatan extends Component
 
         if (!$userPermissions->contains('masterdata-kegiatan')) {
             abort(403, 'Unauthorized action.');
+        }
+        $userRole = Auth::user()->roles->pluck('name')->first();
+        if ($userRole === 'admin') {
+            $this->userRole = 'admin';
+        } else if ($userRole === 'pengurus') {
+            $this->userRole = 'pengurus';
         }
     }
 
@@ -62,6 +69,10 @@ class Kegiatan extends Component
 
     public function store()
     {
+        if (!$this->id_organisasi) {
+            $this->id_organisasi = \App\Models\Anggota::where('id_user', Auth::id())->value('id_organisasi');
+        }
+
         $this->validate([
             'id_organisasi' => 'required|exists:organisasis,id_organisasi',
             'nama_kegiatan' => 'required|string|max:255',
@@ -113,6 +124,7 @@ class Kegiatan extends Component
             'status' => 'required|string|max:50',
         ]);
 
+
         $kegiatan = ModelsKegiatan::findOrFail($this->id_kegiatan);
         $kegiatan->update([
             'id_organisasi' => $this->id_organisasi,
@@ -146,15 +158,61 @@ class Kegiatan extends Component
         $this->idToDelete = null;
     }
 
+    public function cekPendaftaran($id)
+    {
+        $this->cek_pendaftaran = true;
+        $this->id_kegiatan = $id;
+    }
     public function render()
     {
-        return view('livewire.pages.admin.masterdata.kegiatan.index', [
-            'data' => ModelsKegiatan::when($this->search, function ($query) {
-                $query->where('nama_kegiatan', 'like', '%' . $this->search . '%')
-                      ->orWhere('lokasi', 'like', '%' . $this->search . '%')
-                      ->orWhere('status', 'like', '%' . $this->search . '%');
-            })->paginate(10),
-            'organisasis' => Organisasi::all(),
-        ]);
+        if ($this->userRole === 'admin') {
+            if (!$this->cek_pendaftaran) {
+                return view('livewire.pages.admin.masterdata.kegiatan.index', [
+                    'data' => ModelsKegiatan::when($this->search, function ($query) {
+                        $query->where('nama_kegiatan', 'like', '%' . $this->search . '%')
+                            ->orWhere('lokasi', 'like', '%' . $this->search . '%')
+                            ->orWhere('status', 'like', '%' . $this->search . '%');
+                    })->paginate(10),
+                    'organisasis' => Organisasi::all(),
+                ]);
+            } else {
+                return view('livewire.pages.admin.masterdata.kegiatan.pendaftaran', [
+                    'dataPendaftaran' => PendaftaranKegiatan::where('id_kegiatan', $this->id_kegiatan)->when($this->search, function ($query) {
+                        $query->whereHas('anggota', function ($q) {
+                            $q->where('nama', 'like', '%' . $this->search . '%');
+                        });
+                    })->paginate(10),
+                    'organisasis' => Organisasi::all(),
+                ]);
+            }
+        } else if ($this->userRole === 'pengurus') {
+            $idOrganisasi = \App\Models\Anggota::where('id_user', Auth::id())->value('id_organisasi');
+            if (!$this->cek_pendaftaran) {
+                return view('livewire.pages.admin.masterdata.kegiatan.index-pengurus', [
+                    'data' => ModelsKegiatan::where('id_organisasi', $idOrganisasi)
+                        ->when($this->search, function ($query) {
+                            $query->where(function ($q) {
+                                $q->where('nama_kegiatan', 'like', '%' . $this->search . '%')
+                                    ->orWhere('lokasi', 'like', '%' . $this->search . '%')
+                                    ->orWhere('status', 'like', '%' . $this->search . '%');
+                            });
+                        })->paginate(10),
+                    'organisasis' => Organisasi::all(),
+                ]);
+            } else {
+                return view('livewire.pages.admin.masterdata.kegiatan.pendaftaran', [
+                    'dataPendaftaran' => PendaftaranKegiatan::where('id_kegiatan', $this->id_kegiatan)
+                        ->whereHas('anggota', function ($query) use ($idOrganisasi) {
+                            $query->where('id_organisasi', $idOrganisasi);
+                        })
+                        ->when($this->search, function ($query) {
+                            $query->whereHas('anggota', function ($q) {
+                                $q->where('nama', 'like', '%' . $this->search . '%');
+                            });
+                        })->paginate(10),
+                    'organisasis' => Organisasi::all(),
+                ]);
+            }
+        }
     }
 }

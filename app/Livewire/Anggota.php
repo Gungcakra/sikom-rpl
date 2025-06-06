@@ -16,7 +16,7 @@ class Anggota extends Component
     use WithPagination;
     protected $paginationTheme = 'bootstrap';
 
-    public $idAnggota, $id_user, $id_organisasi, $nama, $nim, $no_hp, $prodi, $tanggal_gabung, $status_keanggotaan, $idToDelete, $search = '';
+    public $idAnggota, $id_user, $id_organisasi, $nama, $nim, $no_hp, $prodi, $tanggal_gabung, $status_keanggotaan, $idToDelete, $search = '', $userRole;
     public $listeners = ['deleteAnggota'];
 
     public function mount()
@@ -29,6 +29,13 @@ class Anggota extends Component
 
         if (!$userPermissions->contains('masterdata-anggota')) {
             abort(403, 'Unauthorized action.');
+        }
+        $userRole = Auth::user()->roles->pluck('name')->first();
+
+        if ($userRole === 'admin') {
+            $this->userRole = 'admin';
+        } else if ($userRole === 'pengurus') {
+            $this->userRole = 'pengurus';
         }
     }
 
@@ -45,6 +52,16 @@ class Anggota extends Component
         $this->status_keanggotaan = '';
     }
 
+    public function openModal()
+    {
+        $this->dispatch('show-modal');
+    }
+
+    public function closeModal()
+    {
+        $this->dispatch('hide-modal');
+        $this->resetFields();
+    }
     public function edit($id)
     {
         $anggota = ModelsAnggota::findOrFail($id);
@@ -57,8 +74,7 @@ class Anggota extends Component
         $this->prodi = $anggota->prodi;
         $this->tanggal_gabung = $anggota->tanggal_gabung;
         $this->status_keanggotaan = $anggota->status_keanggotaan;
-
-        $this->dispatch('show-modal');
+        $this->openModal();
     }
 
     public function update()
@@ -87,8 +103,7 @@ class Anggota extends Component
         ]);
 
         $this->dispatch('success', 'Data anggota berhasil diperbarui.');
-        $this->dispatch('hide-modal');
-        $this->resetFields();
+        $this->closeModal();
     }
 
     public function delete($id)
@@ -111,13 +126,33 @@ class Anggota extends Component
 
     public function render()
     {
-        return view('livewire.pages.admin.masterdata.anggota.index', [
-            'data' => ModelsAnggota::when($this->search, function ($query) {
-                $query->where('nama', 'like', '%' . $this->search . '%')
-                      ->orWhere('nim', 'like', '%' . $this->search . '%');
-            })->paginate(10),
-            'organisasi' => Organisasi::all(),
-            'users' => User::all(),
-        ]);
+        if ($this->userRole == 'admin') {
+            return view('livewire.pages.admin.masterdata.anggota.index', [
+                'data' => ModelsAnggota::when($this->search, function ($query) {
+                    $query->where('nama', 'like', '%' . $this->search . '%')
+                        ->orWhere('nim', 'like', '%' . $this->search . '%');
+                })->paginate(10),
+                'organisasi' => Organisasi::all(),
+                'users' => User::all(),
+            ]);
+        } else {
+            $idAnggota = \App\Models\Anggota::where('id_user', Auth::id())
+                ->pluck('id_anggota');
+
+            $getPengurus = \App\Models\Pengurus::whereIn('id_anggota', $idAnggota)->get();
+
+            $getIdAnggotaFromPengurus = $getPengurus->pluck('id_anggota');
+            $getIdOrganisasi = \App\Models\Anggota::whereIn('id_anggota', $getIdAnggotaFromPengurus)->pluck('id_organisasi')->first();
+            return view('livewire.pages.admin.masterdata.anggota.index-pengurus', [
+
+                'data' => \App\Models\Anggota::where('id_organisasi', $getIdOrganisasi)
+                    ->when($this->search, function ($query) {
+                        $query->where('nama', 'like', '%' . $this->search . '%')
+                            ->orWhere('nim', 'like', '%' . $this->search . '%');
+                    })->paginate(10),
+                'organisasi' => Organisasi::all(),
+                'users' => User::all(),
+            ]);
+        }
     }
 }

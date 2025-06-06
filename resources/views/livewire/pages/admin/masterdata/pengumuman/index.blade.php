@@ -1,5 +1,5 @@
 <div class="d-flex flex-column flex-column-fluid">
-    <x-slot:title>Pengumuman Management</x-slot:title>
+    <x-slot:title>Manajemen Pengumuman</x-slot:title>
     <!--begin::Toolbar-->
     <div id="kt_app_toolbar" class="app-toolbar py-3 py-lg-6">
         <!--begin::Toolbar container-->
@@ -7,7 +7,7 @@
             <!--begin::Page title-->
             <div class="page-title d-flex flex-column justify-content-center flex-wrap me-3">
                 <!--begin::Title-->
-                <h1 class="page-heading d-flex text-dark fw-bold fs-3 flex-column justify-content-center my-0">Pengumuman Management</h1>
+                <h1 class="page-heading d-flex text-dark fw-bold fs-3 flex-column justify-content-center my-0">Manajemen Pengumuman</h1>
                 <!--end::Title-->
                 <!--begin::Breadcrumb-->
                 <ul class="breadcrumb breadcrumb-separatorless fw-semibold fs-7 my-0 pt-1">
@@ -110,7 +110,7 @@
                                         <!--end::Menu item-->
                                         <!--begin::Menu item-->
                                         <div class="menu-item px-3">
-                                            <a href="#" class="menu-link px-3 w-100" data-kt-ecommerce-product-filter="delete_row" wire:click="delete({{ $pengumuman->id_pengumuman }})">Delete</a>
+                                            <a href="#" class="menu-link px-3 w-100" data-kt-ecommerce-product-filter="delete_row" wire:click="delete({{ $pengumuman->id_pengumuman }})">Hapus</a>
                                         </div>
                                         <!--end::Menu item-->
                                     </div>
@@ -170,14 +170,16 @@
         Swal.fire({
             title: message
             , showCancelButton: true
-            , confirmButtonText: "Yes"
-            , cancelButtonText: "No"
+            , confirmButtonText: "Ya"
+,
+                confirmButtonColor: "#d33"
+            , cancelButtonText: "Tidak"
             , icon: "warning"
         }).then((result) => {
             if (result.isConfirmed) {
                 Livewire.dispatch('deletePengumuman');
             } else {
-                Swal.fire("Cancelled", "Delete Cancelled.", "info");
+                Swal.fire("Aksi Dibatalkan", "Batal Menghapus.", "info");
             }
         });
     });

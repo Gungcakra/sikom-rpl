@@ -56,6 +56,7 @@
                         @error('status') <div class="invalid-feedback">{{ $message }}</div> @enderror
                     </div>
                 </div>
+                @if(Auth::user()->roles->pluck('name')->first() == 'admin')
                 <div class="row g-9 mb-8">
                     <div class="col-md-12 mb-8 fv-row">
                         <label class="d-flex align-items-center fs-6 fw-semibold mb-2">
@@ -70,6 +71,7 @@
                         @error('id_organisasi') <div class="invalid-feedback">{{ $message }}</div> @enderror
                     </div>
                 </div>
+                @endif
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-light" data-bs-dismiss="modal" aria-label="Close" wire:click="closeModal">Close</button>

@@ -113,14 +113,16 @@
             Swal.fire({
                 title: message
                 , showCancelButton: true
-                , confirmButtonText: "Yes"
-                , cancelButtonText: "No"
+                , confirmButtonText: "Ya"
+,
+                confirmButtonColor: "#d33"
+                , cancelButtonText: "Tidak"
                 , icon: "warning"
             }).then((result) => {
                 if (result.isConfirmed) {
                     Livewire.dispatch('deleteKegiatan');
                 } else {
-                    Swal.fire("Cancelled", "Delete Cancelled.", "info");
+                    Swal.fire("Aksi Dibatalkan", "Batal Menghapus.", "info");
                 }
             });
         });

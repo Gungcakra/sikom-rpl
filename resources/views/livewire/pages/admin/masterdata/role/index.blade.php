@@ -34,7 +34,7 @@
                 <!--end::Secondary button-->
                 <!--begin::Primary button-->
                 <button class="btn btn-sm fw-bold btn-primary" wire:click="create()">Tambah Role</button>
-                <button class="btn btn-sm fw-bold btn-primary" wire:click="createPermission()">Add Permission</button>
+                <button class="btn btn-sm fw-bold btn-primary" wire:click="createPermission()">Tambah Permission</button>
                 <!--end::Primary button-->
             </div>
             <!--end::Actions-->
@@ -160,7 +160,7 @@
                                 <tr wire:key="permission-{{ $permission->id }}">
                                     <td>{{ $index + 1 }}</td>
                                     <td>
-                                        <a href="#" class="btn btn-sm btn-light btn-flex btn-center btn-active-light-primary" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">Actions
+                                        <a href="#" class="btn btn-sm btn-light btn-flex btn-center btn-active-light-primary" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">Aksi
                                             <i class="ki-duotone ki-down fs-5 ms-1"></i></a>
                                         <!--begin::Menu-->
                                         <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-semibold fs-7 w-125px py-4" data-kt-menu="true">
@@ -171,7 +171,7 @@
                                             <!--end::Menu item-->
                                             <!--begin::Menu item-->
                                             <div class="menu-item px-3">
-                                                <a href="#" class="menu-link px-3 w-100" data-kt-ecommerce-product-filter="delete_row" wire:click="deletePermission({{ $permission->id }})">Delete</a>
+                                                <a href="#" class="menu-link px-3 w-100" data-kt-ecommerce-product-filter="delete_row" wire:click="deletePermission({{ $permission->id }})">Hapus</a>
                                             </div>
                                             <!--end::Menu item-->
                                     </td>
@@ -280,14 +280,16 @@
             Swal.fire({
                 title: message
                 , showCancelButton: true
-                , confirmButtonText: "Yes"
-                , cancelButtonText: "No"
+                , confirmButtonText: "Ya"
+,
+                confirmButtonColor: "#d33"
+                , cancelButtonText: "Tidak"
                 , icon: "warning"
             }).then((result) => {
                 if (result.isConfirmed) {
                     Livewire.dispatch('deleteRoleConfirm');
                 } else {
-                    Swal.fire("Cancelled", "Delete Cancelled.", "info");
+                    Swal.fire("Aksi Dibatalkan", "Batal Menghapus.", "info");
                 }
             });
         });
@@ -296,8 +298,10 @@
             Swal.fire({
                 title: message
                 , showCancelButton: true
-                , confirmButtonText: "Yes"
-                , cancelButtonText: "No"
+                , confirmButtonText: "Ya"
+,
+                confirmButtonColor: "#d33"
+                , cancelButtonText: "Tidak"
                 , icon: "warning"
             }).then((result) => {
                 if (result.isConfirmed) {

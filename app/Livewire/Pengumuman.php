@@ -13,7 +13,7 @@ class Pengumuman extends Component
     use WithPagination;
     protected $paginationTheme = 'bootstrap';
     protected $listeners = ['deletePengumuman'];
-    public $idPengumuman, $idToDelete, $search = '', $id_organisasi, $judul, $isi;
+    public $idPengumuman, $idToDelete, $search = '', $id_organisasi, $judul, $isi, $userRole;
 
     public function mount()
     {
@@ -22,7 +22,7 @@ class Pengumuman extends Component
         $this->id_organisasi = null;
         $this->judul = '';
         $this->isi = '';
-        
+
 
         $userPermissions = Auth::user()->roles->flatMap(function ($role) {
             return $role->permissions->pluck('name');
@@ -30,6 +30,13 @@ class Pengumuman extends Component
 
         if (!$userPermissions->contains('masterdata-pengumuman')) {
             abort(403, 'Unauthorized action.');
+        }
+
+        $userRole = Auth::user()->roles->pluck('name')->first();
+        if ($userRole === 'admin') {
+            $this->userRole = 'admin';
+        } else if ($userRole === 'pengurus') {
+            $this->userRole = 'pengurus';
         }
     }
 
@@ -52,7 +59,13 @@ class Pengumuman extends Component
         try {
             // Set id_organisasi if not set
             if (!$this->id_organisasi) {
-                $this->id_organisasi = \App\Models\Anggota::where('id_user', Auth::id())->value('id_organisasi');
+                // Ambil semua id_anggota milik user ini
+                $idAnggotaUser = \App\Models\Anggota::where('id_user', Auth::id())->pluck('id_anggota');
+                // Cari pengurus yang id_anggota-nya milik user ini
+                $pengurusUser = \App\Models\Pengurus::whereIn('id_anggota', $idAnggotaUser)->pluck('id_anggota');
+                // Ambil id_organisasi dari anggota yang id_anggota-nya adalah pengurus
+                $idOrganisasi = \App\Models\Anggota::whereIn('id_anggota', $pengurusUser)->pluck('id_organisasi')->first();
+                $this->id_organisasi = $idOrganisasi;
             }
 
             $this->validate([
@@ -106,7 +119,7 @@ class Pengumuman extends Component
     {
         $pengumuman = \App\Models\Pengumuman::findOrFail($id);
         $this->idToDelete = $pengumuman->id_pengumuman;
-        $this->dispatch('confirm-delete', 'Yakin Ingin Menhapus?.');
+        $this->dispatch('confirm-delete', 'Yakin Ingin Menghapus?.');
     }
     public function deletePengumuman()
     {
@@ -117,12 +130,31 @@ class Pengumuman extends Component
     }
     public function render()
     {
-        return view('livewire.pages.admin.masterdata.pengumuman.index', [
-            'data' => \App\Models\Pengumuman::when($this->search, function ($query) {
-                $query->where('judul', 'like', '%' . $this->search . '%')
-                      ->orWhere('isi', 'like', '%' . $this->search . '%');
-            })->paginate(10),
-            'organisasi' => \App\Models\Organisasi::all(),
-        ]);
+        if ($this->userRole == 'admin') {
+            return view('livewire.pages.admin.masterdata.pengumuman.index', [
+                'data' => \App\Models\Pengumuman::when($this->search, function ($query) {
+                    $query->where('judul', 'like', '%' . $this->search . '%')
+                        ->orWhere('isi', 'like', '%' . $this->search . '%');
+                })->paginate(10),
+                'organisasi' => \App\Models\Organisasi::all(),
+            ]);
+        } else if($this->userRole == 'pengurus') {
+            // Ambil semua id_anggota milik user ini
+            $idAnggotaUser = \App\Models\Anggota::where('id_user', Auth::id())->pluck('id_anggota');
+
+            // Cari pengurus yang id_anggota-nya milik user ini
+            $pengurusUser = \App\Models\Pengurus::whereIn('id_anggota', $idAnggotaUser)->pluck('id_anggota');
+
+            // Ambil id_organisasi dari anggota yang id_anggota-nya adalah pengurus
+            $idOrganisasi = \App\Models\Anggota::whereIn('id_anggota', $pengurusUser)->pluck('id_organisasi')->first();
+            return view('livewire.pages.admin.masterdata.pengumuman.index-pengurus', [
+                'data' => \App\Models\Pengumuman::where('id_organisasi', $idOrganisasi)
+                    ->when($this->search, function ($query) {
+                        $query->where('judul', 'like', '%' . $this->search . '%')
+                            ->orWhere('isi', 'like', '%' . $this->search . '%');
+                    })->paginate(10),
+                'organisasi' => \App\Models\Organisasi::all(),
+            ]);
+        }
     }
 }

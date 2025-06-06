@@ -2,6 +2,7 @@
 
 namespace App\Livewire;
 
+use App\Models\Anggota;
 use App\Models\Menu;
 use Livewire\Component;
 use Livewire\Attributes\Layout;
@@ -11,7 +12,7 @@ use Illuminate\Support\Facades\Auth;
 #[Layout('layouts.admin')]
 class Dashboard extends Component
 {
-    public $totalKegiatanAnggota = 0, $organisasiDiikuti = 0, $pengumumanSaya = [];
+    public $totalKegiatanAnggota = 0, $organisasiDiikuti = 0, $pengumumanSaya = [], $totalAnggotaOrganisasi = 0, $totalKegiatanOrganisasi = 0;
     public function mount()
     {
         $userPermissions = Auth::user()->roles->flatMap(function ($role) {
@@ -25,19 +26,29 @@ class Dashboard extends Component
 
         // Jika user adalah anggota, ambil id anggotanya dari tabel anggota
         if ($checkRoleUser->contains('anggota')) {
-            $anggota = \App\Models\Anggota::where('id_user', Auth::id())->first();
-            if ($anggota) {
-                $pendaftaranKegiatan = \App\Models\PendaftaranKegiatan::where('id_anggota', $anggota->id_anggota)->get();
-                $this->totalKegiatanAnggota = $pendaftaranKegiatan;
+            $anggotaList = \App\Models\Anggota::where('id_user', Auth::id())->get();
+            if ($anggotaList->isNotEmpty()) {
+            $anggotaIds = $anggotaList->pluck('id_anggota');
+            $organisasiIds = $anggotaList->pluck('id_organisasi');
+            $pendaftaranKegiatan = \App\Models\PendaftaranKegiatan::whereIn('id_anggota', $anggotaIds)->get();
+            $this->totalKegiatanAnggota = $pendaftaranKegiatan;
+            $this->organisasiDiikuti = $anggotaList;
+            $this->pengumumanSaya = \App\Models\Pengumuman::whereIn('id_organisasi', $organisasiIds)->orderBy('created_at', 'desc')->get();
             }
-            $this->organisasiDiikuti = \App\Models\Anggota::where('id_user', Auth::id())->get();
-            $this->pengumumanSaya = \App\Models\Pengumuman::whereHas('organisasi', function ($query) use ($anggota) {
-                $query->where('id_organisasi', $anggota->id_organisasi);
-            })->get();
-            
-            // $this->id_anggota = $anggota->id_anggota; // Misalnya, jika ingin menyimpan id anggota
-        }
         
+        } else if ($checkRoleUser->contains('pengurus')) {
+            $this->getDataKepengurusan();
+        }
+    }
+    public function getDataKepengurusan()
+    {
+        $idAnggota = \App\Models\Anggota::where('id_user', Auth::id())
+            ->pluck('id_anggota');
+        $getPengurus = \App\Models\Pengurus::whereIn('id_anggota', $idAnggota)->get();
+        $getIdAnggotaFromPengurus = $getPengurus->pluck('id_anggota');
+        $getIdOrganisasi = \App\Models\Anggota::whereIn('id_anggota', $getIdAnggotaFromPengurus)->pluck('id_organisasi')->first();
+        $this->totalAnggotaOrganisasi =  \App\Models\Anggota::where('id_organisasi', $getIdOrganisasi)->get();
+        $this->totalKegiatanOrganisasi = \App\Models\Kegiatan::where('id_organisasi', $getIdOrganisasi)->count();
     }
     public function render()
     {
@@ -48,40 +59,33 @@ class Dashboard extends Component
             ->whereNull('waktu_logout')
             ->distinct('id_user')
             ->count('user_id');
-        
+
         $user = Auth::user();
         $roles = $user->roles->pluck('name')->toArray();
 
         if (in_array('admin', $roles)) {
             // Dashboard untuk admin
             return view('livewire.pages.admin.dashboard', [
-            'organisasiCount' => \App\Models\Organisasi::count(),
-            'userCount' => \App\Models\User::count(),
-            'kegiatanCount' => \App\Models\Kegiatan::whereMonth('created_at', now()->month)
-                ->whereYear('created_at', now()->year)
-                ->count(),
-            'userActiveTodayCount' => $userActiveTodayCount,
+                'organisasiCount' => \App\Models\Organisasi::count(),
+                'userCount' => \App\Models\User::count(),
+                'kegiatanCount' => \App\Models\Kegiatan::whereMonth('created_at', now()->month)
+                    ->whereYear('created_at', now()->year)
+                    ->count(),
+                'userActiveTodayCount' => $userActiveTodayCount,
             ]);
         } elseif (in_array('pengurus', $roles)) {
-            // Dashboard untuk pengurus
-            return view('livewire.pages.pengurus.dashboard', [
-            // Tambahkan data khusus pengurus di sini
-           
-            'userActiveTodayCount' => $userActiveTodayCount,
+            return view('livewire.pages.admin.dashboardpengurus', [
+
+                'totalAnggota' => $this->totalAnggotaOrganisasi,
+                'totalKegiatan' => $this->totalKegiatanOrganisasi,
             ]);
         } elseif (in_array('anggota', $roles)) {
-           
+
             return view('livewire.pages.admin.dashboardanggota', [
-            
-            // 'kegiatanSayaCount' => \App\Models\Kegiatan::whereHas('anggota', function ($q) use ($user) {
-            //     $q->where('user_id', $user->id);
-            // })->count(),
-            // 'kegiatanSayaCount' => \App\Models\Kegiatan::whereHas('anggota', function ($q) use ($user) {
-            //     $q->where('id_user', $user->id);
-            // })->count(),
-            'kegiatanSaya' => $this->totalKegiatanAnggota,
-            'organisasiDiikuti' => $this->organisasiDiikuti,
-            'pengumumanSaya' => $this->pengumumanSaya,
+
+                'kegiatanSaya' => $this->totalKegiatanAnggota,
+                'organisasiDiikuti' => $this->organisasiDiikuti,
+                'pengumumanSaya' => $this->pengumumanSaya,
             ]);
         } else {
             abort(403, 'Unauthorized action.');

@@ -1785,7 +1785,7 @@
                                                     <span class="menu-bullet">
                                                         <span class="bullet bullet-dot"></span>
                                                     </span>
-                                                    <span class="menu-title">Add Product</span>
+                                                    <span class="menu-title">Tambah Product</span>
                                                 </a>
                                                 <!--end:Menu link-->
                                             </div>
@@ -1809,7 +1809,7 @@
                                                     <span class="menu-bullet">
                                                         <span class="bullet bullet-dot"></span>
                                                     </span>
-                                                    <span class="menu-title">Add Category</span>
+                                                    <span class="menu-title">Tambah Category</span>
                                                 </a>
                                                 <!--end:Menu link-->
                                             </div>
@@ -1874,7 +1874,7 @@
                                                     <span class="menu-bullet">
                                                         <span class="bullet bullet-dot"></span>
                                                     </span>
-                                                    <span class="menu-title">Add Order</span>
+                                                    <span class="menu-title">Tambah Order</span>
                                                 </a>
                                                 <!--end:Menu link-->
                                             </div>
@@ -2328,7 +2328,7 @@
                                             <span class="menu-bullet">
                                                 <span class="bullet bullet-dot"></span>
                                             </span>
-                                            <span class="menu-title">Add Contact</span>
+                                            <span class="menu-title">Tambah Contact</span>
                                         </a>
                                         <!--end:Menu link-->
                                     </div>
@@ -2410,7 +2410,7 @@
                                             <span class="menu-bullet">
                                                 <span class="bullet bullet-dot"></span>
                                             </span>
-                                            <span class="menu-title">Add Subscription</span>
+                                            <span class="menu-title">Tambah Subscription</span>
                                         </a>
                                         <!--end:Menu link-->
                                     </div>
