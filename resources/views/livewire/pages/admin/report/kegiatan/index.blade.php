@@ -1,5 +1,5 @@
 <div class="d-flex flex-column flex-column-fluid">
-    <x-slot:title>Laporan Transaksi</x-slot:title>
+    <x-slot:title>Laporan Kegiatan</x-slot:title>
     <!--begin::Toolbar-->
     <div id="kt_app_toolbar" class="app-toolbar py-3 py-lg-6">
         <!--begin::Toolbar container-->
@@ -7,7 +7,7 @@
             <!--begin::Page title-->
             <div class="page-title d-flex flex-column justify-content-center flex-wrap me-3">
                 <!--begin::Title-->
-                <h1 class="page-heading d-flex text-dark fw-bold fs-3 flex-column justify-content-center my-0">Laporan Keuangan</h1>
+                <h1 class="page-heading d-flex text-dark fw-bold fs-3 flex-column justify-content-center my-0">Laporan Kegiatan</h1>
                 <!--end::Title-->
                 <!--begin::Breadcrumb-->
                 <ul class="breadcrumb breadcrumb-separatorless fw-semibold fs-7 my-0 pt-1">
@@ -22,7 +22,7 @@
                     </li>
                     <!--end::Item-->
                     <!--begin::Item-->
-                    <li class="breadcrumb-item text-muted">Transaksi</li>
+                    <li class="breadcrumb-item text-muted">Kegiatan</li>
                     <!--end::Item-->
                 </ul>
                 <!--end::Breadcrumb-->
@@ -35,7 +35,7 @@
                 {{-- <a href="#" class="btn btn-sm fw-bold btn-secondary" data-bs-toggle="modal" data-bs-target="#kt_modal_create_app">Rollover</a> --}}
                 <!--end::Secondary button-->
                 <!--begin::Primary button-->
-                {{-- <button class="btn btn-sm fw-bold btn-primary" wire:click="create()">Tambah Transaksi</button> --}}
+                {{-- <button class="btn btn-sm fw-bold btn-primary" wire:click="create()">Tambah Kegiatan</button> --}}
                 @if(Auth::user()->roles->pluck('name')->first() == 'pengurus')
                 <button class="btn btn-sm fw-bold btn-danger" onclick="printMainContent()">Export To PDF</button>
                 <button class="btn btn-sm fw-bold btn-success" onclick="exportToExcel()">Export To EXCEL</button>
@@ -58,7 +58,7 @@
                             <span class="path1"></span>
                             <span class="path2"></span>
                         </i>
-                        <input type="text" data-kt-customer-table-filter="search" class="form-control form-control-solid w-250px ps-12" placeholder="Cari Transaksi" wire:model.live.debounce.100ms="search" />
+                        <input type="text" data-kt-customer-table-filter="search" class="form-control form-control-solid w-250px ps-12" placeholder="Cari Kegiatan" wire:model.live.debounce.100ms="search" />
                     </div>
                     <div class="form-group position-relative mb-0">
                         <input type="text" class="form-control form-control-solid pe-10" placeholder="Pick date range" id="range" name="range" wire:model="range" />
@@ -84,11 +84,12 @@
                                 @if(Auth::user()->roles->pluck('name')->first() == 'admin')
                                 <th>Organisasi</td>
                                     @endif
-                                <th>Bank</th>
-                                <th>Nominal</th>
-                                <th>Keterangan</th>
-                                <th>Jenis Transaksi</th>
+                                <th>Nama Kegiatan</th>
+                                {{-- <th>Deskripsi</th> --}}
+                                <th>Tempat</th>
                                 <th>Tanggal</th>
+                                <th>Kuota</th>
+                                <th>Status</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -96,23 +97,23 @@
                                 <td colspan="7" class="text-center">Tidak Ada Data</td>
                                 </tr>
                                 @else
-                                @foreach ($data as $index => $transaksi)
-                                <tr wire:key="transaksi-{{ $transaksi->id_transaksi }}">
+                                @foreach ($data as $index => $kegiatan)
+                                <tr wire:key="kegiatan-{{ $kegiatan->id_kegiatan }}">
                                     <td>{{ $index + 1 }}</td>
                                     @if(Auth::user()->roles->pluck('name')->first() == 'admin')
-                                    <td>{{ $transaksi->bank->organisasi->nama_organisasi }}</td>
+                                    <td>{{ $kegiatan->organisasi->nama_organisasi }}</td>
                                     @endif
                                     <td>
-                                        {{ ($transaksi->bank->nama_bank ?? '-') . ' - ' . ($transaksi->bank->atas_nama ?? '-') }}
+                                       {{ $kegiatan->nama_kegiatan }}
                                     </td>
-                                    <td>Rp {{ number_format($transaksi->nominal, 0, ',', '.') }}</td>
-                                    <td>{{ $transaksi->keterangan }}</td>
+                                    {{-- <td>{{ $kegiatan->deskripsi }}</td> --}}
+                                    <td>{{ $kegiatan->lokasi }}</td>
                                     <td>
-                                        <div class="badge badge-light-{{ $transaksi->jenis_transaksi == 'pemasukan' ? 'success' : 'danger' }}">
-                                            {{ ucfirst($transaksi->jenis_transaksi) }}
-                                        </div>
+                                        {{ \Carbon\Carbon::parse($kegiatan->tanggal_pelaksanaan)->locale('id')->translatedFormat('l, d F Y') }}
                                     </td>
-                                    <td>{{ \Carbon\Carbon::parse($transaksi->created_at)->timezone('Asia/Singapore')->format('d M Y H:i') }}</td>
+                                    <td>{{ $kegiatan->kuota_peserta +  $kegiatan->pendaftaranKegiatans->count() }}
+                                    </td>
+                                    <td>{{ $kegiatan->status }}</td>
                                 </tr>
                                 @endforeach
                                 @endif
@@ -123,7 +124,7 @@
                 </div> --}}
             </div>
 
-            {{-- @include('livewire.pages.admin.masterdata.transaksi.modal') --}}
+            {{-- @include('livewire.pages.admin.masterdata.kegiatan.modal') --}}
         </div>
 
     </div>
@@ -136,11 +137,11 @@
     function exportToExcel() {
         var table = document.getElementById("table-responsive");
         var wb = XLSX.utils.table_to_book(table, {
-            sheet: "Laporan Keuangan"
+            sheet: "Laporan Kegiatan"
         });
 
 
-        var ws = wb.Sheets["Laporan Keuangan"];
+        var ws = wb.Sheets["Laporan Kegiatan"];
         var cols = [];
         var range = XLSX.utils.decode_range(ws["!ref"]);
         for (var C = range.s.c; C <= range.e.c; ++C) {
@@ -177,7 +178,7 @@
         }
 
         var dateRange = document.getElementById("range").value || "All Dates";
-        XLSX.writeFile(wb, `Laporan Keuangan - ${dateRange}.xlsx`);
+        XLSX.writeFile(wb, `Laporan Kegiatan - ${dateRange}.xlsx`);
     }
     $(function() {
         $("#range").daterangepicker();
@@ -194,7 +195,7 @@
         });
 
         Livewire.on('show-modal', () => {
-            var modalEl = document.getElementById('transaksiModal');
+            var modalEl = document.getElementById('kegiatanModal');
             var existingModal = bootstrap.Modal.getInstance(modalEl);
             if (!existingModal) {
                 var myModal = new bootstrap.Modal(modalEl, {});
@@ -206,7 +207,7 @@
             }
         });
         Livewire.on('hide-modal', () => {
-            var modalEl = document.getElementById('transaksiModal');
+            var modalEl = document.getElementById('kegiatanModal');
             var modal = bootstrap.Modal.getInstance(modalEl);
             if (modal) {
                 modal.hide();
@@ -230,7 +231,7 @@
                 , icon: "warning"
             }).then((result) => {
                 if (result.isConfirmed) {
-                    Livewire.dispatch('deleteTransaksi');
+                    Livewire.dispatch('deleteKegiatan');
                 } else {
                     Swal.fire("Cancelled", "Delete Cancelled.", "info");
                 }

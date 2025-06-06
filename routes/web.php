@@ -5,6 +5,7 @@ use App\Livewire\Auth\Login;
 use App\Livewire\Bank;
 use App\Livewire\Dashboard;
 use App\Livewire\Kegiatan;
+use App\Livewire\LaporanKegiatan;
 use App\Livewire\LaporanKeuangan;
 use App\Livewire\MenuManagement;
 use App\Livewire\Organisasi as LivewireOrganisasi;
@@ -39,7 +40,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/transaksi-keuangan', Transaksi::class)->name('transaksi-keuangan');
     Route::get('/pengumuman', Pengumuman::class)->name('pengumuman');
     Route::get('/departement', MenuManagement::class)->name('departement');
-    Route::get('/laporan-kegiatan', MenuManagement::class)->name('laporan-kegiatan');
+    Route::get('/laporan-kegiatan', LaporanKegiatan::class)->name('laporan-kegiatan');
     Route::get('/laporan-keuangan', LaporanKeuangan::class)->name('laporan-keuangan');
     Route::get('/test', MenuManagement::class)->name('test');
 });
