@@ -401,48 +401,117 @@ class DatabaseSeeder extends Seeder
         ]);
       
 
-        // Ambil organisasi
-        $organisasi1 = \App\Models\Organisasi::where('nama_organisasi', 'Progress')->first();
-        $organisasi2 = \App\Models\Organisasi::where('nama_organisasi', 'Syntax')->first();
-        $organisasi3 = \App\Models\Organisasi::where('nama_organisasi', 'Himatography')->first();
-
-        
-
+        // Ambil organisasi sesuai data yang di-insert di atas
+        $organisasi1 = \App\Models\Organisasi::where('nama_organisasi', 'UKM Programmer (Progress)')->first();
+        $organisasi2 = \App\Models\Organisasi::where('nama_organisasi', 'UKM Multimedia')->first();
+        $organisasi3 = \App\Models\Organisasi::where('nama_organisasi', 'Himatography (Himpunan Mahasiswa Photography STIKOM Bali)')->first();
+        $organisasi4 = \App\Models\Organisasi::where('nama_organisasi', 'Senat Mahasiswa STIKOM Bali')->first();
+        $organisasi5 = \App\Models\Organisasi::where('nama_organisasi', 'UKM Robotic')->first();
+        $organisasi6 = \App\Models\Organisasi::where('nama_organisasi', 'Komunitas Linux STIKOM Bali')->first();
+        $organisasi7 = \App\Models\Organisasi::where('nama_organisasi', 'UKM Modern Dance')->first();
+        $organisasi8 = \App\Models\Organisasi::where('nama_organisasi', 'UKM Basket')->first();
+        $organisasi9 = \App\Models\Organisasi::where('nama_organisasi', 'Voice of STIKOM Bali (VOS)')->first();
 
         // kegiatan
         \App\Models\Kegiatan::insert([
             [
-                'id_organisasi' => $organisasi1->id_organisasi,
-                'nama_kegiatan' => 'Pelatihan Pemrograman',
-                'deskripsi' => 'Pelatihan dasar pemrograman untuk anggota baru.',
-                'tanggal_pelaksanaan' => now()->addDays(7)->toDateString(),
-                'kuota_peserta' => 50,
-                'lokasi' => 'Lab Komputer Progress',
-                'status' => 'aktif',
-                'created_at' => now(),
-                'updated_at' => now(),
+            'id_organisasi' => $organisasi1->id_organisasi,
+            'nama_kegiatan' => 'Pelatihan Pemrograman',
+            'deskripsi' => 'Pelatihan dasar pemrograman untuk anggota baru.',
+            'tanggal_pelaksanaan' => now()->addDays(7)->toDateString(),
+            'kuota_peserta' => 50,
+            'lokasi' => 'Lab Komputer Progress',
+            'status' => 'aktif',
+            'created_at' => now(),
+            'updated_at' => now(),
             ],
             [
-                'id_organisasi' => $organisasi2->id_organisasi,
-                'nama_kegiatan' => 'Workshop Desain Grafis',
-                'deskripsi' => 'Workshop desain grafis untuk anggota.',
-                'tanggal_pelaksanaan' => now()->addDays(14)->toDateString(),
-                'kuota_peserta' => 40,
-                'lokasi' => 'Ruang Multimedia Syntax',
-                'status' => 'aktif',
-                'created_at' => now(),
-                'updated_at' => now(),
+            'id_organisasi' => $organisasi2->id_organisasi,
+            'nama_kegiatan' => 'Workshop Desain Grafis',
+            'deskripsi' => 'Workshop desain grafis untuk anggota.',
+            'tanggal_pelaksanaan' => now()->addDays(14)->toDateString(),
+            'kuota_peserta' => 40,
+            'lokasi' => 'Ruang Multimedia Syntax',
+            'status' => 'aktif',
+            'created_at' => now(),
+            'updated_at' => now(),
             ],
             [
-                'id_organisasi' => $organisasi3->id_organisasi,
-                'nama_kegiatan' => 'Seminar Teknologi Informasi',
-                'deskripsi' => 'Seminar tentang perkembangan teknologi informasi terkini.',
-                'tanggal_pelaksanaan' => now()->addDays(21)->toDateString(),
-                'kuota_peserta' => 100,
-                'lokasi' => 'Aula Himatography',
-                'status' => 'aktif',
-                'created_at' => now(),
-                'updated_at' => now(),
+            'id_organisasi' => $organisasi3->id_organisasi,
+            'nama_kegiatan' => 'Seminar Teknologi Informasi',
+            'deskripsi' => 'Seminar tentang perkembangan teknologi informasi terkini.',
+            'tanggal_pelaksanaan' => now()->addDays(21)->toDateString(),
+            'kuota_peserta' => 100,
+            'lokasi' => 'Aula Himatography',
+            'status' => 'aktif',
+            'created_at' => now(),
+            'updated_at' => now(),
+            ],
+            [
+            'id_organisasi' => $organisasi4->id_organisasi,
+            'nama_kegiatan' => 'Rapat Kerja Tahunan',
+            'deskripsi' => 'Rapat kerja tahunan Senat Mahasiswa STIKOM Bali.',
+            'tanggal_pelaksanaan' => now()->addDays(10)->toDateString(),
+            'kuota_peserta' => 30,
+            'lokasi' => 'Ruang Rapat Senat',
+            'status' => 'aktif',
+            'created_at' => now(),
+            'updated_at' => now(),
+            ],
+            [
+            'id_organisasi' => $organisasi5->id_organisasi,
+            'nama_kegiatan' => 'Kompetisi Robotik Internal',
+            'deskripsi' => 'Kompetisi robotik antar anggota UKM Robotic.',
+            'tanggal_pelaksanaan' => now()->addDays(12)->toDateString(),
+            'kuota_peserta' => 20,
+            'lokasi' => 'Lab Robotik',
+            'status' => 'aktif',
+            'created_at' => now(),
+            'updated_at' => now(),
+            ],
+            [
+            'id_organisasi' => $organisasi6->id_organisasi,
+            'nama_kegiatan' => 'Pelatihan Linux Dasar',
+            'deskripsi' => 'Pelatihan penggunaan Linux untuk pemula.',
+            'tanggal_pelaksanaan' => now()->addDays(15)->toDateString(),
+            'kuota_peserta' => 25,
+            'lokasi' => 'Ruang Komunitas Linux',
+            'status' => 'aktif',
+            'created_at' => now(),
+            'updated_at' => now(),
+            ],
+            [
+            'id_organisasi' => $organisasi7->id_organisasi,
+            'nama_kegiatan' => 'Latihan Tari Modern',
+            'deskripsi' => 'Latihan rutin UKM Modern Dance.',
+            'tanggal_pelaksanaan' => now()->addDays(18)->toDateString(),
+            'kuota_peserta' => 35,
+            'lokasi' => 'Studio Tari',
+            'status' => 'aktif',
+            'created_at' => now(),
+            'updated_at' => now(),
+            ],
+            [
+            'id_organisasi' => $organisasi8->id_organisasi,
+            'nama_kegiatan' => 'Turnamen Basket Internal',
+            'deskripsi' => 'Turnamen basket antar anggota UKM Basket.',
+            'tanggal_pelaksanaan' => now()->addDays(20)->toDateString(),
+            'kuota_peserta' => 24,
+            'lokasi' => 'Lapangan Basket STIKOM',
+            'status' => 'aktif',
+            'created_at' => now(),
+            'updated_at' => now(),
+            ],
+            [
+            'id_organisasi' => $organisasi9->id_organisasi,
+            'nama_kegiatan' => 'Pelatihan Public Speaking',
+            'deskripsi' => 'Pelatihan public speaking untuk anggota VOS.',
+            'tanggal_pelaksanaan' => now()->addDays(22)->toDateString(),
+            'kuota_peserta' => 30,
+            'lokasi' => 'Ruang VOS',
+            'status' => 'aktif',
+            'created_at' => now(),
+            'updated_at' => now(),
             ],
         ]);
     }
