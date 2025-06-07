@@ -15,6 +15,7 @@ use App\Models\User;
 use Illuminate\Database\Seeder;
 use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
+use Illuminate\Support\Str;
 
 class DatabaseSeeder extends Seeder
 {
@@ -514,5 +515,85 @@ class DatabaseSeeder extends Seeder
             'updated_at' => now(),
             ],
         ]);
+
+
+        // Ambil organisasi yang akan diikuti banyak anggota
+        // Data identitas lebih Indonesia
+        $namaDepan = ['Budi', 'Siti', 'Agus', 'Dewi', 'Rizki', 'Putri', 'Andi', 'Rina', 'Joko', 'Ayu', 'Dian', 'Bayu', 'Wulan', 'Fajar', 'Lestari', 'Yoga', 'Indah', 'Rizka', 'Dimas', 'Nia'];
+        $namaBelakang = ['Santoso', 'Wijaya', 'Saputra', 'Sari', 'Pratama', 'Utami', 'Hidayat', 'Permata', 'Setiawan', 'Rahmawati', 'Susanto', 'Putra', 'Putri', 'Wibowo', 'Anggraini', 'Kusuma', 'Ramadhan', 'Maulana', 'Puspita', 'Syahputra'];
+        $prodis = ['Sistem Informasi', 'Teknik Informatika', 'Manajemen Informatika', 'Sistem Komputer', 'Teknologi Informasi'];
+        $orgProgress = \App\Models\Organisasi::where('nama_organisasi', 'UKM Programmer (Progress)')->first();
+        $orgLinux = \App\Models\Organisasi::where('nama_organisasi', 'Komunitas Linux STIKOM Bali')->first();
+        $orgMultimedia = \App\Models\Organisasi::where('nama_organisasi', 'UKM Multimedia')->first();
+
+        // Buat 20 user anggota yang join ke Progress, Linux, Multimedia
+        for ($i = 1; $i <= 20; $i++) {
+            $namaDepanRand = $namaDepan[array_rand($namaDepan)];
+            $namaBelakangRand = $namaBelakang[array_rand($namaBelakang)];
+            $nama = $namaDepanRand . ' ' . $namaBelakangRand;
+            $prodi = $prodis[array_rand($prodis)];
+            // Email dari nama, lowercase, spasi jadi titik, tambah nomor urut
+            $email = strtolower(str_replace(' ', '.', $nama)) . $i . '@mail.com';
+            $user = \App\Models\User::create([
+            'name' => $nama,
+            'email' => $email,
+            'password' => bcrypt('anggota123'),
+            ]);
+            $user->assignRole('anggota');
+
+            $nim = 'NIM' . str_pad($i, 4, '0', STR_PAD_LEFT);
+            $no_hp = '08123' . rand(1000000, 9999999);
+
+            foreach ([$orgProgress, $orgLinux, $orgMultimedia] as $org) {
+            \App\Models\Anggota::create([
+                'id_user' => $user->id,
+                'id_organisasi' => $org->id_organisasi,
+                'nama' => $nama,
+                'nim' => $nim . $org->id_organisasi,
+                'no_hp' => $no_hp,
+                'prodi' => $prodi,
+                'tanggal_gabung' => now(),
+                'status_keanggotaan' => 'aktif',
+            ]);
+            }
+        }
+
+        // Ambil semua organisasi kecuali Progress, Linux, Multimedia
+        $otherOrgs = \App\Models\Organisasi::whereNotIn('id_organisasi', [
+            $orgProgress->id_organisasi,
+            $orgLinux->id_organisasi,
+            $orgMultimedia->id_organisasi,
+        ])->get();
+
+        // Buat 10 user anggota yang join ke 1 organisasi random dari selain 3 di atas
+        for ($i = 1; $i <= 10; $i++) {
+            $namaDepanRand = $namaDepan[array_rand($namaDepan)];
+            $namaBelakangRand = $namaBelakang[array_rand($namaBelakang)];
+            $nama = $namaDepanRand . ' ' . $namaBelakangRand;
+            $prodi = $prodis[array_rand($prodis)];
+            $email = strtolower(str_replace(' ', '.', $nama)) . 'lain' . $i . '@mail.com';
+            $user = \App\Models\User::create([
+            'name' => $nama,
+            'email' => $email,
+            'password' => bcrypt('anggota123'),
+            ]);
+            $user->assignRole('anggota');
+
+            $nim = 'NIML' . str_pad($i, 4, '0', STR_PAD_LEFT);
+            $no_hp = '08213' . rand(1000000, 9999999);
+
+            $org = $otherOrgs->random();
+
+            \App\Models\Anggota::create([
+            'id_user' => $user->id,
+            'id_organisasi' => $org->id_organisasi,
+            'nama' => $nama,
+            'nim' => $nim . $org->id_organisasi,
+            'no_hp' => $no_hp,
+            'prodi' => $prodi,
+            'tanggal_gabung' => now(),
+            'status_keanggotaan' => 'aktif',
+            ]);
+        }
     }
 }
