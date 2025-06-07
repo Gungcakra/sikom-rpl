@@ -6,12 +6,15 @@ use App\Models\User as ModelsUser;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Attributes\Layout;
 use Livewire\Component;
+use Livewire\WithPagination;
 use Spatie\Permission\Models\Role;
 
 #[Layout('layouts.admin')]
 
 class User extends Component
 {
+    use WithPagination;
+    protected $paginationTheme = 'bootstrap';
     public $userId, $name, $email, $password,  $idToDelete, $selectedRole;
     protected $listeners = ['deleteUser', 'loadData'];
     public $search = '';

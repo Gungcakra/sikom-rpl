@@ -82,7 +82,6 @@
                                 <td colspan="6" class="text-center">Tidak Ada Data</td>
                                 </tr>
                                 @else
-    
                                 @foreach ( $data as $index => $user)
     
                                 <tr wire:key="user-{{ $user->id }}">
@@ -102,6 +101,8 @@
                                                 <a href="#" class="menu-link px-3 w-100" data-kt-ecommerce-product-filter="delete_row" wire:click="delete({{ $user->id }})">Hapus</a>
                                             </div>
                                             <!--end::Menu item-->
+                                        </div>
+                                        <!--end::Menu-->
                                     </td>
                                     <td>{{ $user->name }}</td>
                                     <td>{{ $user->email }}</td>
@@ -111,13 +112,11 @@
                                 @endforeach
                                 @endif
                         </tbody>
-    
-    
                     </table>
                     <div class="mt-4 d-flex justify-content-center">
                         {{ $data->onEachSide(1)->links() }}
                     </div>
-                </div>
+                </div>  
     
                 @include('livewire.pages.admin.masterdata.user.modal')
             </div>
