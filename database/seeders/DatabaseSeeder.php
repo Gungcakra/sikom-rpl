@@ -2,15 +2,18 @@
 
 namespace Database\Seeders;
 
+use App\Models\Anggota;
 use App\Models\Bank;
 use App\Models\Customer;
 use App\Models\Departement;
 use App\Models\Employee;
 use App\Models\Menu;
+use App\Models\Pengurus;
 use App\Models\Service;
 use App\Models\SparePart;
 use App\Models\SubMenu;
 use App\Models\User;
+use Carbon\Carbon;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Spatie\Permission\Models\Permission;
@@ -24,7 +27,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-
+        //
 
 
 
@@ -244,163 +247,163 @@ class DatabaseSeeder extends Seeder
         // Seed organisasi
         \App\Models\Organisasi::insert([
             [
-            'nama_organisasi' => 'Senat Mahasiswa STIKOM Bali',
-            'jenis' => 'Organisasi',
-            'deskripsi' => 'Senat Mahasiswa STIKOM Bali',
-            'tahun_berdiri' => rand(2000, 2016),
+                'nama_organisasi' => 'Senat Mahasiswa STIKOM Bali',
+                'jenis' => 'Organisasi',
+                'deskripsi' => 'Senat Mahasiswa STIKOM Bali',
+                'tahun_berdiri' => rand(2000, 2016),
             ],
             [
-            'nama_organisasi' => 'Badan Legislatif Mahasiswa STIKOM Bali',
-            'jenis' => 'Organisasi',
-            'deskripsi' => 'Badan Legislatif Mahasiswa STIKOM Bali',
-            'tahun_berdiri' => rand(2000, 2016),
+                'nama_organisasi' => 'Badan Legislatif Mahasiswa STIKOM Bali',
+                'jenis' => 'Organisasi',
+                'deskripsi' => 'Badan Legislatif Mahasiswa STIKOM Bali',
+                'tahun_berdiri' => rand(2000, 2016),
             ],
             [
-            'nama_organisasi' => 'Kesatuan Mahasiswa Hindu Dharma STIKOM Bali',
-            'jenis' => 'Organisasi',
-            'deskripsi' => 'Kesatuan Mahasiswa Hindu Dharma STIKOM Bali',
-            'tahun_berdiri' => rand(2000, 2016),
+                'nama_organisasi' => 'Kesatuan Mahasiswa Hindu Dharma STIKOM Bali',
+                'jenis' => 'Organisasi',
+                'deskripsi' => 'Kesatuan Mahasiswa Hindu Dharma STIKOM Bali',
+                'tahun_berdiri' => rand(2000, 2016),
             ],
             [
-            'nama_organisasi' => 'Moslem Community of STIKOM Bali (MCOS)',
-            'jenis' => 'Organisasi',
-            'deskripsi' => 'Moslem Community of STIKOM Bali (MCOS)',
-            'tahun_berdiri' => rand(2000, 2016),
+                'nama_organisasi' => 'Moslem Community of STIKOM Bali (MCOS)',
+                'jenis' => 'Organisasi',
+                'deskripsi' => 'Moslem Community of STIKOM Bali (MCOS)',
+                'tahun_berdiri' => rand(2000, 2016),
             ],
             [
-            'nama_organisasi' => 'Persaudaraan Mahasiswa Kristiani (PMK)',
-            'jenis' => 'Organisasi',
-            'deskripsi' => 'Persaudaraan Mahasiswa Kristiani (PMK)',
-            'tahun_berdiri' => rand(2000, 2016),
+                'nama_organisasi' => 'Persaudaraan Mahasiswa Kristiani (PMK)',
+                'jenis' => 'Organisasi',
+                'deskripsi' => 'Persaudaraan Mahasiswa Kristiani (PMK)',
+                'tahun_berdiri' => rand(2000, 2016),
             ],
             [
-            'nama_organisasi' => 'UKM Multimedia',
-            'jenis' => 'UKM',
-            'deskripsi' => 'UKM Multimedia',
-            'tahun_berdiri' => rand(2000, 2016),
+                'nama_organisasi' => 'UKM Multimedia',
+                'jenis' => 'UKM',
+                'deskripsi' => 'UKM Multimedia',
+                'tahun_berdiri' => rand(2000, 2016),
             ],
             [
-            'nama_organisasi' => 'UKM Robotic',
-            'jenis' => 'UKM',
-            'deskripsi' => 'UKM Robotic',
-            'tahun_berdiri' => rand(2000, 2016),
+                'nama_organisasi' => 'UKM Robotic',
+                'jenis' => 'UKM',
+                'deskripsi' => 'UKM Robotic',
+                'tahun_berdiri' => rand(2000, 2016),
             ],
             [
-            'nama_organisasi' => 'UKM Programmer (Progress)',
-            'jenis' => 'UKM',
-            'deskripsi' => 'UKM Programmer (Progress)',
-            'tahun_berdiri' => rand(2000, 2016),
+                'nama_organisasi' => 'UKM Programmer (Progress)',
+                'jenis' => 'UKM',
+                'deskripsi' => 'UKM Programmer (Progress)',
+                'tahun_berdiri' => rand(2000, 2016),
             ],
             [
-            'nama_organisasi' => 'Komunitas Linux STIKOM Bali',
-            'jenis' => 'Komunitas',
-            'deskripsi' => 'Komunitas Linux STIKOM Bali',
-            'tahun_berdiri' => rand(2000, 2016),
+                'nama_organisasi' => 'Komunitas Linux STIKOM Bali',
+                'jenis' => 'Komunitas',
+                'deskripsi' => 'Komunitas Linux STIKOM Bali',
+                'tahun_berdiri' => rand(2000, 2016),
             ],
             [
-            'nama_organisasi' => 'Computer Club Technopreneurship',
-            'jenis' => 'Komunitas',
-            'deskripsi' => 'Computer Club Technopreneurship',
-            'tahun_berdiri' => rand(2000, 2016),
+                'nama_organisasi' => 'Computer Club Technopreneurship',
+                'jenis' => 'Komunitas',
+                'deskripsi' => 'Computer Club Technopreneurship',
+                'tahun_berdiri' => rand(2000, 2016),
             ],
             [
-            'nama_organisasi' => 'Himpunan Mahasiswa Jurnalistik (HIMAJESTIK)',
-            'jenis' => 'Himpunan',
-            'deskripsi' => 'Himpunan Mahasiswa Jurnalistik (HIMAJESTIK)',
-            'tahun_berdiri' => rand(2000, 2016),
+                'nama_organisasi' => 'Himpunan Mahasiswa Jurnalistik (HIMAJESTIK)',
+                'jenis' => 'Himpunan',
+                'deskripsi' => 'Himpunan Mahasiswa Jurnalistik (HIMAJESTIK)',
+                'tahun_berdiri' => rand(2000, 2016),
             ],
             [
-            'nama_organisasi' => 'Himaprodi SI (Himpunan Mahasiswa Program Studi Sistem Informasi)',
-            'jenis' => 'Himpunan',
-            'deskripsi' => 'Himaprodi SI (Himpunan Mahasiswa Program Studi Sistem Informasi)',
-            'tahun_berdiri' => rand(2000, 2016),
+                'nama_organisasi' => 'Himaprodi SI (Himpunan Mahasiswa Program Studi Sistem Informasi)',
+                'jenis' => 'Himpunan',
+                'deskripsi' => 'Himaprodi SI (Himpunan Mahasiswa Program Studi Sistem Informasi)',
+                'tahun_berdiri' => rand(2000, 2016),
             ],
             [
-            'nama_organisasi' => 'Himatography (Himpunan Mahasiswa Photography STIKOM Bali)',
-            'jenis' => 'Himpunan',
-            'deskripsi' => 'Himatography (Himpunan Mahasiswa Photography STIKOM Bali)',
-            'tahun_berdiri' => rand(2000, 2016),
+                'nama_organisasi' => 'Himatography (Himpunan Mahasiswa Photography STIKOM Bali)',
+                'jenis' => 'Himpunan',
+                'deskripsi' => 'Himatography (Himpunan Mahasiswa Photography STIKOM Bali)',
+                'tahun_berdiri' => rand(2000, 2016),
             ],
             [
-            'nama_organisasi' => 'Korps Suka Rela PMI (KSR PMI) Widya Bhakti',
-            'jenis' => 'Organisasi',
-            'deskripsi' => 'Korps Suka Rela PMI (KSR PMI) Widya Bhakti',
-            'tahun_berdiri' => rand(2000, 2016),
+                'nama_organisasi' => 'Korps Suka Rela PMI (KSR PMI) Widya Bhakti',
+                'jenis' => 'Organisasi',
+                'deskripsi' => 'Korps Suka Rela PMI (KSR PMI) Widya Bhakti',
+                'tahun_berdiri' => rand(2000, 2016),
             ],
             [
-            'nama_organisasi' => 'Voice of STIKOM Bali (VOS)',
-            'jenis' => 'Komunitas',
-            'deskripsi' => 'Voice of STIKOM Bali (VOS)',
-            'tahun_berdiri' => rand(2000, 2016),
+                'nama_organisasi' => 'Voice of STIKOM Bali (VOS)',
+                'jenis' => 'Komunitas',
+                'deskripsi' => 'Voice of STIKOM Bali (VOS)',
+                'tahun_berdiri' => rand(2000, 2016),
             ],
             [
-            'nama_organisasi' => 'Komunitas Mahasiswa Pecinta Alam STIKOM Bali (KOMPAST)',
-            'jenis' => 'Komunitas',
-            'deskripsi' => 'Komunitas Mahasiswa Pecinta Alam STIKOM Bali (KOMPAST)',
-            'tahun_berdiri' => rand(2000, 2016),
+                'nama_organisasi' => 'Komunitas Mahasiswa Pecinta Alam STIKOM Bali (KOMPAST)',
+                'jenis' => 'Komunitas',
+                'deskripsi' => 'Komunitas Mahasiswa Pecinta Alam STIKOM Bali (KOMPAST)',
+                'tahun_berdiri' => rand(2000, 2016),
             ],
             [
-            'nama_organisasi' => 'Stikom Bali Music Community (SBMC)',
-            'jenis' => 'Komunitas',
-            'deskripsi' => 'Stikom Bali Music Community (SBMC)',
-            'tahun_berdiri' => rand(2000, 2016),
+                'nama_organisasi' => 'Stikom Bali Music Community (SBMC)',
+                'jenis' => 'Komunitas',
+                'deskripsi' => 'Stikom Bali Music Community (SBMC)',
+                'tahun_berdiri' => rand(2000, 2016),
             ],
             [
-            'nama_organisasi' => 'UKM Modern Dance',
-            'jenis' => 'UKM',
-            'deskripsi' => 'UKM Modern Dance',
-            'tahun_berdiri' => rand(2000, 2016),
+                'nama_organisasi' => 'UKM Modern Dance',
+                'jenis' => 'UKM',
+                'deskripsi' => 'UKM Modern Dance',
+                'tahun_berdiri' => rand(2000, 2016),
             ],
             [
-            'nama_organisasi' => 'Tabuh “Bramara Gita”',
-            'jenis' => 'UKM',
-            'deskripsi' => 'Tabuh “Bramara Gita”',
-            'tahun_berdiri' => rand(2000, 2016),
+                'nama_organisasi' => 'Tabuh “Bramara Gita”',
+                'jenis' => 'UKM',
+                'deskripsi' => 'Tabuh “Bramara Gita”',
+                'tahun_berdiri' => rand(2000, 2016),
             ],
             [
-            'nama_organisasi' => 'UKM Pragina STIKOM Bali',
-            'jenis' => 'UKM',
-            'deskripsi' => 'UKM Pragina STIKOM Bali',
-            'tahun_berdiri' => rand(2000, 2016),
+                'nama_organisasi' => 'UKM Pragina STIKOM Bali',
+                'jenis' => 'UKM',
+                'deskripsi' => 'UKM Pragina STIKOM Bali',
+                'tahun_berdiri' => rand(2000, 2016),
             ],
             [
-            'nama_organisasi' => 'UKM Bela Diri Shorinji Kempo',
-            'jenis' => 'UKM',
-            'deskripsi' => 'UKM Bela Diri Shorinji Kempo',
-            'tahun_berdiri' => rand(2000, 2016),
+                'nama_organisasi' => 'UKM Bela Diri Shorinji Kempo',
+                'jenis' => 'UKM',
+                'deskripsi' => 'UKM Bela Diri Shorinji Kempo',
+                'tahun_berdiri' => rand(2000, 2016),
             ],
             [
-            'nama_organisasi' => 'UKM Wira Usaha',
-            'jenis' => 'UKM',
-            'deskripsi' => 'UKM Wira Usaha',
-            'tahun_berdiri' => rand(2000, 2016),
+                'nama_organisasi' => 'UKM Wira Usaha',
+                'jenis' => 'UKM',
+                'deskripsi' => 'UKM Wira Usaha',
+                'tahun_berdiri' => rand(2000, 2016),
             ],
             [
-            'nama_organisasi' => 'UKM Badminton of STMIK STIKOM Bali (BOSS)',
-            'jenis' => 'UKM',
-            'deskripsi' => 'UKM Badminton of STMIK STIKOM Bali (BOSS)',
-            'tahun_berdiri' => rand(2000, 2016),
+                'nama_organisasi' => 'UKM Badminton of STMIK STIKOM Bali (BOSS)',
+                'jenis' => 'UKM',
+                'deskripsi' => 'UKM Badminton of STMIK STIKOM Bali (BOSS)',
+                'tahun_berdiri' => rand(2000, 2016),
             ],
             [
-            'nama_organisasi' => 'UKM Bali Futsal Club',
-            'jenis' => 'UKM',
-            'deskripsi' => 'UKM Bali Futsal Club',
-            'tahun_berdiri' => rand(2000, 2016),
+                'nama_organisasi' => 'UKM Bali Futsal Club',
+                'jenis' => 'UKM',
+                'deskripsi' => 'UKM Bali Futsal Club',
+                'tahun_berdiri' => rand(2000, 2016),
             ],
             [
-            'nama_organisasi' => 'UKM Basket',
-            'jenis' => 'UKM',
-            'deskripsi' => 'UKM Basket',
-            'tahun_berdiri' => rand(2000, 2016),
+                'nama_organisasi' => 'UKM Basket',
+                'jenis' => 'UKM',
+                'deskripsi' => 'UKM Basket',
+                'tahun_berdiri' => rand(2000, 2016),
             ],
             [
-            'nama_organisasi' => 'UKM Paskamras',
-            'jenis' => 'UKM',
-            'deskripsi' => 'UKM Paskamras',
-            'tahun_berdiri' => rand(2000, 2016),
+                'nama_organisasi' => 'UKM Paskamras',
+                'jenis' => 'UKM',
+                'deskripsi' => 'UKM Paskamras',
+                'tahun_berdiri' => rand(2000, 2016),
             ],
         ]);
-      
+
 
         // Ambil organisasi sesuai data yang di-insert di atas
         $organisasi1 = \App\Models\Organisasi::where('nama_organisasi', 'UKM Programmer (Progress)')->first();
@@ -416,184 +419,222 @@ class DatabaseSeeder extends Seeder
         // kegiatan
         \App\Models\Kegiatan::insert([
             [
-            'id_organisasi' => $organisasi1->id_organisasi,
-            'nama_kegiatan' => 'Pelatihan Pemrograman',
-            'deskripsi' => 'Pelatihan dasar pemrograman untuk anggota baru.',
-            'tanggal_pelaksanaan' => now()->addDays(7)->toDateString(),
-            'kuota_peserta' => 50,
-            'lokasi' => 'Lab Komputer Progress',
-            'status' => 'aktif',
-            'created_at' => now(),
-            'updated_at' => now(),
+                'id_organisasi' => $organisasi1->id_organisasi,
+                'nama_kegiatan' => 'Pelatihan Pemrograman',
+                'deskripsi' => 'Pelatihan dasar pemrograman untuk anggota baru.',
+                'tanggal_pelaksanaan' => now()->addDays(7)->toDateString(),
+                'kuota_peserta' => 50,
+                'lokasi' => 'Lab Komputer Progress',
+                'status' => 'aktif',
+                'created_at' => now(),
+                'updated_at' => now(),
             ],
             [
-            'id_organisasi' => $organisasi2->id_organisasi,
-            'nama_kegiatan' => 'Workshop Desain Grafis',
-            'deskripsi' => 'Workshop desain grafis untuk anggota.',
-            'tanggal_pelaksanaan' => now()->addDays(14)->toDateString(),
-            'kuota_peserta' => 40,
-            'lokasi' => 'Ruang Multimedia Syntax',
-            'status' => 'aktif',
-            'created_at' => now(),
-            'updated_at' => now(),
+                'id_organisasi' => $organisasi2->id_organisasi,
+                'nama_kegiatan' => 'Workshop Desain Grafis',
+                'deskripsi' => 'Workshop desain grafis untuk anggota.',
+                'tanggal_pelaksanaan' => now()->addDays(14)->toDateString(),
+                'kuota_peserta' => 40,
+                'lokasi' => 'Ruang Multimedia Syntax',
+                'status' => 'aktif',
+                'created_at' => now(),
+                'updated_at' => now(),
             ],
             [
-            'id_organisasi' => $organisasi3->id_organisasi,
-            'nama_kegiatan' => 'Seminar Teknologi Informasi',
-            'deskripsi' => 'Seminar tentang perkembangan teknologi informasi terkini.',
-            'tanggal_pelaksanaan' => now()->addDays(21)->toDateString(),
-            'kuota_peserta' => 100,
-            'lokasi' => 'Aula Himatography',
-            'status' => 'aktif',
-            'created_at' => now(),
-            'updated_at' => now(),
+                'id_organisasi' => $organisasi3->id_organisasi,
+                'nama_kegiatan' => 'Seminar Teknologi Informasi',
+                'deskripsi' => 'Seminar tentang perkembangan teknologi informasi terkini.',
+                'tanggal_pelaksanaan' => now()->addDays(21)->toDateString(),
+                'kuota_peserta' => 100,
+                'lokasi' => 'Aula Himatography',
+                'status' => 'aktif',
+                'created_at' => now(),
+                'updated_at' => now(),
             ],
             [
-            'id_organisasi' => $organisasi4->id_organisasi,
-            'nama_kegiatan' => 'Rapat Kerja Tahunan',
-            'deskripsi' => 'Rapat kerja tahunan Senat Mahasiswa STIKOM Bali.',
-            'tanggal_pelaksanaan' => now()->addDays(10)->toDateString(),
-            'kuota_peserta' => 30,
-            'lokasi' => 'Ruang Rapat Senat',
-            'status' => 'aktif',
-            'created_at' => now(),
-            'updated_at' => now(),
+                'id_organisasi' => $organisasi4->id_organisasi,
+                'nama_kegiatan' => 'Rapat Kerja Tahunan',
+                'deskripsi' => 'Rapat kerja tahunan Senat Mahasiswa STIKOM Bali.',
+                'tanggal_pelaksanaan' => now()->addDays(10)->toDateString(),
+                'kuota_peserta' => 30,
+                'lokasi' => 'Ruang Rapat Senat',
+                'status' => 'aktif',
+                'created_at' => now(),
+                'updated_at' => now(),
             ],
             [
-            'id_organisasi' => $organisasi5->id_organisasi,
-            'nama_kegiatan' => 'Kompetisi Robotik Internal',
-            'deskripsi' => 'Kompetisi robotik antar anggota UKM Robotic.',
-            'tanggal_pelaksanaan' => now()->addDays(12)->toDateString(),
-            'kuota_peserta' => 20,
-            'lokasi' => 'Lab Robotik',
-            'status' => 'aktif',
-            'created_at' => now(),
-            'updated_at' => now(),
+                'id_organisasi' => $organisasi5->id_organisasi,
+                'nama_kegiatan' => 'Kompetisi Robotik Internal',
+                'deskripsi' => 'Kompetisi robotik antar anggota UKM Robotic.',
+                'tanggal_pelaksanaan' => now()->addDays(12)->toDateString(),
+                'kuota_peserta' => 20,
+                'lokasi' => 'Lab Robotik',
+                'status' => 'aktif',
+                'created_at' => now(),
+                'updated_at' => now(),
             ],
             [
-            'id_organisasi' => $organisasi6->id_organisasi,
-            'nama_kegiatan' => 'Pelatihan Linux Dasar',
-            'deskripsi' => 'Pelatihan penggunaan Linux untuk pemula.',
-            'tanggal_pelaksanaan' => now()->addDays(15)->toDateString(),
-            'kuota_peserta' => 25,
-            'lokasi' => 'Ruang Komunitas Linux',
-            'status' => 'aktif',
-            'created_at' => now(),
-            'updated_at' => now(),
+                'id_organisasi' => $organisasi6->id_organisasi,
+                'nama_kegiatan' => 'Pelatihan Linux Dasar',
+                'deskripsi' => 'Pelatihan penggunaan Linux untuk pemula.',
+                'tanggal_pelaksanaan' => now()->addDays(15)->toDateString(),
+                'kuota_peserta' => 25,
+                'lokasi' => 'Ruang Komunitas Linux',
+                'status' => 'aktif',
+                'created_at' => now(),
+                'updated_at' => now(),
             ],
             [
-            'id_organisasi' => $organisasi7->id_organisasi,
-            'nama_kegiatan' => 'Latihan Tari Modern',
-            'deskripsi' => 'Latihan rutin UKM Modern Dance.',
-            'tanggal_pelaksanaan' => now()->addDays(18)->toDateString(),
-            'kuota_peserta' => 35,
-            'lokasi' => 'Studio Tari',
-            'status' => 'aktif',
-            'created_at' => now(),
-            'updated_at' => now(),
+                'id_organisasi' => $organisasi7->id_organisasi,
+                'nama_kegiatan' => 'Latihan Tari Modern',
+                'deskripsi' => 'Latihan rutin UKM Modern Dance.',
+                'tanggal_pelaksanaan' => now()->addDays(18)->toDateString(),
+                'kuota_peserta' => 35,
+                'lokasi' => 'Studio Tari',
+                'status' => 'aktif',
+                'created_at' => now(),
+                'updated_at' => now(),
             ],
             [
-            'id_organisasi' => $organisasi8->id_organisasi,
-            'nama_kegiatan' => 'Turnamen Basket Internal',
-            'deskripsi' => 'Turnamen basket antar anggota UKM Basket.',
-            'tanggal_pelaksanaan' => now()->addDays(20)->toDateString(),
-            'kuota_peserta' => 24,
-            'lokasi' => 'Lapangan Basket STIKOM',
-            'status' => 'aktif',
-            'created_at' => now(),
-            'updated_at' => now(),
+                'id_organisasi' => $organisasi8->id_organisasi,
+                'nama_kegiatan' => 'Turnamen Basket Internal',
+                'deskripsi' => 'Turnamen basket antar anggota UKM Basket.',
+                'tanggal_pelaksanaan' => now()->addDays(20)->toDateString(),
+                'kuota_peserta' => 24,
+                'lokasi' => 'Lapangan Basket STIKOM',
+                'status' => 'aktif',
+                'created_at' => now(),
+                'updated_at' => now(),
             ],
             [
-            'id_organisasi' => $organisasi9->id_organisasi,
-            'nama_kegiatan' => 'Pelatihan Public Speaking',
-            'deskripsi' => 'Pelatihan public speaking untuk anggota VOS.',
-            'tanggal_pelaksanaan' => now()->addDays(22)->toDateString(),
-            'kuota_peserta' => 30,
-            'lokasi' => 'Ruang VOS',
-            'status' => 'aktif',
-            'created_at' => now(),
-            'updated_at' => now(),
+                'id_organisasi' => $organisasi9->id_organisasi,
+                'nama_kegiatan' => 'Pelatihan Public Speaking',
+                'deskripsi' => 'Pelatihan public speaking untuk anggota VOS.',
+                'tanggal_pelaksanaan' => now()->addDays(22)->toDateString(),
+                'kuota_peserta' => 30,
+                'lokasi' => 'Ruang VOS',
+                'status' => 'aktif',
+                'created_at' => now(),
+                'updated_at' => now(),
             ],
         ]);
 
-
-        // Ambil organisasi yang akan diikuti banyak anggota
-        // Data identitas lebih Indonesia
         $namaDepan = ['Budi', 'Siti', 'Agus', 'Dewi', 'Rizki', 'Putri', 'Andi', 'Rina', 'Joko', 'Ayu', 'Dian', 'Bayu', 'Wulan', 'Fajar', 'Lestari', 'Yoga', 'Indah', 'Rizka', 'Dimas', 'Nia'];
         $namaBelakang = ['Santoso', 'Wijaya', 'Saputra', 'Sari', 'Pratama', 'Utami', 'Hidayat', 'Permata', 'Setiawan', 'Rahmawati', 'Susanto', 'Putra', 'Putri', 'Wibowo', 'Anggraini', 'Kusuma', 'Ramadhan', 'Maulana', 'Puspita', 'Syahputra'];
         $prodis = ['Sistem Informasi', 'Teknik Informatika', 'Manajemen Informatika', 'Sistem Komputer', 'Teknologi Informasi'];
+
         $orgProgress = \App\Models\Organisasi::where('nama_organisasi', 'UKM Programmer (Progress)')->first();
         $orgLinux = \App\Models\Organisasi::where('nama_organisasi', 'Komunitas Linux STIKOM Bali')->first();
         $orgMultimedia = \App\Models\Organisasi::where('nama_organisasi', 'UKM Multimedia')->first();
 
-        // Buat 20 user anggota yang join ke Progress, Linux, Multimedia
+        // Buat 20 user yang join ke 3 organisasi tersebut
         for ($i = 1; $i <= 20; $i++) {
             $namaDepanRand = $namaDepan[array_rand($namaDepan)];
             $namaBelakangRand = $namaBelakang[array_rand($namaBelakang)];
-            $nama = $namaDepanRand . ' ' . $namaBelakangRand;
+            $nama = "$namaDepanRand $namaBelakangRand";
             $prodi = $prodis[array_rand($prodis)];
-            // Email dari nama, lowercase, spasi jadi titik, tambah nomor urut
             $email = strtolower(str_replace(' ', '.', $nama)) . $i . '@mail.com';
+            $nim = rand(210000000, 210099999);
+            $no_hp = '08123' . rand(1000000, 9999999);
+
             $user = \App\Models\User::create([
-            'name' => $nama,
-            'email' => $email,
-            'password' => bcrypt('anggota123'),
+                'name' => $nama,
+                'email' => $email,
+                'password' => bcrypt('anggota123'),
             ]);
             $user->assignRole('anggota');
 
-            $nim = 'NIM' . str_pad($i, 4, '0', STR_PAD_LEFT);
-            $no_hp = '08123' . rand(1000000, 9999999);
-
-            foreach ([$orgProgress, $orgLinux, $orgMultimedia] as $org) {
-            \App\Models\Anggota::create([
+            $dataAnggota = [
                 'id_user' => $user->id,
-                'id_organisasi' => $org->id_organisasi,
                 'nama' => $nama,
-                'nim' => $nim . $org->id_organisasi,
+                'nim' => $nim,
                 'no_hp' => $no_hp,
                 'prodi' => $prodi,
                 'tanggal_gabung' => now(),
                 'status_keanggotaan' => 'aktif',
-            ]);
+            ];
+
+            foreach ([$orgProgress, $orgLinux, $orgMultimedia] as $org) {
+                \App\Models\Anggota::create(array_merge($dataAnggota, [
+                    'id_organisasi' => $org->id_organisasi
+                ]));
             }
         }
 
-        // Ambil semua organisasi kecuali Progress, Linux, Multimedia
+        // Ambil organisasi lain
         $otherOrgs = \App\Models\Organisasi::whereNotIn('id_organisasi', [
             $orgProgress->id_organisasi,
             $orgLinux->id_organisasi,
             $orgMultimedia->id_organisasi,
         ])->get();
 
-        // Buat 10 user anggota yang join ke 1 organisasi random dari selain 3 di atas
+        // Buat 10 user, masing-masing join ke 2 organisasi random dari selain 3 di atas
         for ($i = 1; $i <= 10; $i++) {
             $namaDepanRand = $namaDepan[array_rand($namaDepan)];
             $namaBelakangRand = $namaBelakang[array_rand($namaBelakang)];
-            $nama = $namaDepanRand . ' ' . $namaBelakangRand;
+            $nama = "$namaDepanRand $namaBelakangRand";
             $prodi = $prodis[array_rand($prodis)];
             $email = strtolower(str_replace(' ', '.', $nama)) . 'lain' . $i . '@mail.com';
+            $nim = rand(210100000, 210199999);
+            $no_hp = '08213' . rand(1000000, 9999999);
+
             $user = \App\Models\User::create([
-            'name' => $nama,
-            'email' => $email,
-            'password' => bcrypt('anggota123'),
+                'name' => $nama,
+                'email' => $email,
+                'password' => bcrypt('anggota123'),
             ]);
             $user->assignRole('anggota');
 
-            $nim = 'NIML' . str_pad($i, 4, '0', STR_PAD_LEFT);
-            $no_hp = '08213' . rand(1000000, 9999999);
+            $dataAnggota = [
+                'id_user' => $user->id,
+                'nama' => $nama,
+                'nim' => $nim,
+                'no_hp' => $no_hp,
+                'prodi' => $prodi,
+                'tanggal_gabung' => now(),
+                'status_keanggotaan' => 'aktif',
+            ];
 
-            $org = $otherOrgs->random();
+            $orgs = $otherOrgs->random(2);
 
-            \App\Models\Anggota::create([
-            'id_user' => $user->id,
-            'id_organisasi' => $org->id_organisasi,
-            'nama' => $nama,
-            'nim' => $nim . $org->id_organisasi,
-            'no_hp' => $no_hp,
-            'prodi' => $prodi,
-            'tanggal_gabung' => now(),
-            'status_keanggotaan' => 'aktif',
-            ]);
+            foreach ($orgs as $org) {
+                \App\Models\Anggota::create(array_merge($dataAnggota, [
+                    'id_organisasi' => $org->id_organisasi
+                ]));
+            }
+        }
+
+
+        $jabatanList = ['Ketua', 'Wakil Ketua', 'Sekretaris', 'Bendahara', 'Koordinator', 'Anggota Inti'];
+
+        $periodeMulai = Carbon::create(2023, 1, 1);
+        $periodeAkhir = Carbon::create(2023, 12, 31);
+
+        // Loop untuk semua organisasi (1 - 26)
+        for ($orgId = 1; $orgId <= 26; $orgId++) {
+            // Ambil semua anggota di organisasi ini
+            $anggotaOrganisasi = Anggota::where('id_organisasi', $orgId)->inRandomOrder()->limit(3)->get();
+
+            foreach ($anggotaOrganisasi as $anggota) {
+                $jabatan = $jabatanList[array_rand($jabatanList)];
+
+                // Pastikan relasi ke user tersedia
+                $user = $anggota->user;
+                if ($user) {
+                    $user->syncRoles(['pengurus']);
+                }
+
+                // Cek apakah anggota sudah jadi pengurus untuk organisasi ini
+                $existing = Pengurus::where('id_anggota', $anggota->id_anggota)->first();
+                if (!$existing) {
+                    Pengurus::create([
+                        'id_anggota' => $anggota->id_anggota,
+                        'jabatan' => $jabatan,
+                        'periode_mulai' => $periodeMulai,
+                        'periode_akhir' => $periodeAkhir,
+                    ]);
+                }
+            }
         }
     }
 }

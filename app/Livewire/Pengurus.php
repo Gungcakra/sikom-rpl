@@ -166,15 +166,23 @@ class Pengurus extends Component
 
     public function render()
     {
+        // Ambil semua id_anggota yang sudah menjadi pengurus
+        $pengurusAnggotaIds = ModelsPengurus::pluck('id_anggota')->toArray();
+
+        // Ambil semua nim dari anggota yang sudah menjadi pengurus
+        $nimsSudahPengurus = Anggota::whereIn('id_anggota', $pengurusAnggotaIds)->pluck('nim')->toArray();
+        
         return view('livewire.pages.admin.masterdata.pengurus.index', [
             'data' => ModelsPengurus::with('anggota')
-                ->when($this->search, function ($query) {
-                    $query->whereHas('anggota', function ($q) {
-                        $q->where('nama', 'like', '%' . $this->search . '%');
-                    })->orWhere('jabatan', 'like', '%' . $this->search . '%');
-                })
-                ->paginate(10),
-            'anggotas' => Anggota::all(),
+            ->when($this->search, function ($query) {
+                $query->whereHas('anggota', function ($q) {
+                $q->where('nama', 'like', '%' . $this->search . '%');
+                })->orWhere('jabatan', 'like', '%' . $this->search . '%');
+            })
+            ->paginate(10),
+            // Hanya tampilkan anggota yang nim-nya belum pernah jadi pengurus di organisasi manapun
+            'anggotas' => Anggota::whereNotIn('nim', $nimsSudahPengurus)->get(),
         ]);
+        
     }
 }
