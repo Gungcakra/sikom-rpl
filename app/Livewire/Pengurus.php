@@ -74,11 +74,9 @@ class Pengurus extends Component
             'periode_akhir' => 'required|date|after_or_equal:periode_mulai',
             ]);
 
-            // Cari anggota dan user terkait
             $anggota = Anggota::findOrFail($this->id_anggota);
-            $user = $anggota->user; // pastikan relasi 'user' ada di model Anggota
-
-            // Ubah role user menjadi 'pengurus'
+            $user = $anggota->user; 
+            
             if ($user) {
             $user->syncRoles(['pengurus']);
             }
