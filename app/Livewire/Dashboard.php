@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Auth;
 #[Layout('layouts.admin')]
 class Dashboard extends Component
 {
-    public $totalKegiatanAnggota = 0, $organisasiDiikuti = 0, $pengumumanSaya = [], $totalAnggotaOrganisasi = 0, $totalKegiatanOrganisasi = 0;
+    public $totalKegiatanAnggota = 0, $organisasiDiikuti = 0, $pengumumanSaya = [], $totalAnggotaOrganisasi = 0, $totalKegiatanOrganisasi = 0, $totalSaldoOrganisasi;
     public function mount()
     {
         $userPermissions = Auth::user()->roles->flatMap(function ($role) {
@@ -49,6 +49,8 @@ class Dashboard extends Component
         $getIdOrganisasi = \App\Models\Anggota::whereIn('id_anggota', $getIdAnggotaFromPengurus)->pluck('id_organisasi')->first();
         $this->totalAnggotaOrganisasi =  \App\Models\Anggota::where('id_organisasi', $getIdOrganisasi)->get();
         $this->totalKegiatanOrganisasi = \App\Models\Kegiatan::where('id_organisasi', $getIdOrganisasi)->count();
+
+        $this->totalSaldoOrganisasi = \App\Models\Bank::where('id_organisasi', $getIdOrganisasi)->sum('nominal');
     }
     public function render()
     {
@@ -78,6 +80,7 @@ class Dashboard extends Component
 
                 'totalAnggota' => $this->totalAnggotaOrganisasi,
                 'totalKegiatan' => $this->totalKegiatanOrganisasi,
+                'totalSaldo' => $this->totalSaldoOrganisasi,
             ]);
         } elseif (in_array('anggota', $roles)) {
 

@@ -38,12 +38,12 @@
     <!--begin::Content-->
     <div id="kt_app_content" class="app-content flex-column-fluid">
         <!--begin::Content container-->
-        <div id="kt_app_content_container" class="app-container container-xxl"  style="min-height: 100vh">
+        <div id="kt_app_content_container" class="app-container container-xxl" style="min-height: 100vh">
             <!--begin::Row-->
             <div class="row g-5 g-xl-10 mb-5 mb-xl-10">
-               
-               
-               
+
+
+
                 <!--begin::Col-->
                 <div class="col-xl-4">
                     <!--begin::Card widget 3-->
@@ -141,6 +141,55 @@
                     <!--end::Card widget 3-->
                 </div>
                 <!--end::Col-->
+                <!--end::Col-->
+                <div class="col-xl-4">
+                    <!--begin::Card widget 3-->
+                    <div class="card card-flush bgi-no-repeat bgi-size-contain bgi-position-x-end h-xl-100" style="background-color: #3E97FF;background-image:url('assets/media/svg/shapes/wave-bg-purple.svg')">
+                        <!--begin::Header-->
+                        <div class="card-header pt-5 mb-3">
+                            <!--begin::Icon-->
+                            <div class="d-flex flex-center rounded-circle h-80px w-80px" style="border: 1px dashed rgba(255, 255, 255, 0.4);background-color: #3E97FF">
+                                <i class="ki-duotone ki-call text-white fs-2qx lh-0">
+                                    <span class="path1"></span>
+                                    <span class="path2"></span>
+                                    <span class="path3"></span>
+                                    <span class="path4"></span>
+                                    <span class="path5"></span>
+                                    <span class="path6"></span>
+                                    <span class="path7"></span>
+                                    <span class="path8"></span>
+                                </i>
+                            </div>
+                            <!--end::Icon-->
+                        </div>
+                        <!--end::Header-->
+                        <!--begin::Card body-->
+                        <div class="card-body d-flex align-items-end mb-3">
+                            <!--begin::Info-->
+                            <div class="d-flex align-items-center">
+                                <span class="fs-3hx text-white fw-bold me-6">{{ $totalSaldo }}</span>
+                                {{-- <div class="fw-bold fs-6 text-white">
+									<span class="d-block">Outbound</span>
+									<span class="">Calls</span>
+								</div> --}}
+                            </div>
+                            <!--end::Info-->
+                        </div>
+                        <!--end::Card body-->
+                        <!--begin::Card footer-->
+                        <div class="card-footer" style="border-top: 1px solid rgba(255, 255, 255, 0.3);background: rgba(0, 0, 0, 0.15);">
+                            <!--begin::Progress-->
+                            <div class="fw-bold text-white py-2">
+                                <span class="fs-1 d-block">Total Saldo</span>
+                                {{-- <span class="opacity-50">Service</span> --}}
+                            </div>
+                            <!--end::Progress-->
+                        </div>
+                        <!--end::Card footer-->
+                    </div>
+                    <!--end::Card widget 3-->
+                </div>
+                <!--end::Col-->
                 <!--begin::Col-->
                 {{-- <div class="col-xl-6">
                     <!--begin::Chart widget 36-->
@@ -196,7 +245,7 @@
                 </div> --}}
                 <!--end::Col-->
             </div>
-        
+
             <!--end::Row-->
             {{-- <div class="row g-5 g-xl-10 mb-5 mb-xl-10">
                 @forelse($pengumumanSaya as $pengumuman)
@@ -204,21 +253,21 @@
                         <div class="card shadow-sm border-0 h-100" style="border-radius: 1rem;">
                             <div class="card-body d-flex flex-column justify-content-between" style="background: #fff; border-radius: 1rem;">
                                 <span class="badge bg-light text-primary mb-2">{{ \Carbon\Carbon::parse($pengumuman->tanggal_post)->format('d M Y') }}</span>
-                                <h4 class="fw-bold text-dark mb-2">{{ $pengumuman->judul }}</h4>
-                                <p class="text-gray-700 mb-0" style="min-height: 60px;">{{ Str::limit($pengumuman->isi, 100) }}</p>
-                                <span class="text-muted fs-7 mt-3">Diposting: {{ \Carbon\Carbon::parse($pengumuman->created_at)->diffForHumans() }} {{ $pengumuman->organisasi->nama_organisasi }}</span>
-                            </div>
-                        </div>
-                    </div>
-                @empty
-                    <div class="col-12">
-                        <div class="alert alert-info text-center mb-0">
-                            Belum ada pengumuman.
-                        </div>
-                    </div>
-                @endforelse
-            </div> --}}
-            {{-- <div class="row g-5 g-xl-10 mb-5 mb-xl-10">
+            <h4 class="fw-bold text-dark mb-2">{{ $pengumuman->judul }}</h4>
+            <p class="text-gray-700 mb-0" style="min-height: 60px;">{{ Str::limit($pengumuman->isi, 100) }}</p>
+            <span class="text-muted fs-7 mt-3">Diposting: {{ \Carbon\Carbon::parse($pengumuman->created_at)->diffForHumans() }} {{ $pengumuman->organisasi->nama_organisasi }}</span>
+        </div>
+    </div>
+</div>
+@empty
+<div class="col-12">
+    <div class="alert alert-info text-center mb-0">
+        Belum ada pengumuman.
+    </div>
+</div>
+@endforelse
+</div> --}}
+{{-- <div class="row g-5 g-xl-10 mb-5 mb-xl-10">
                 <!-- Organisasi Diikuti -->
                 <div class="col-xl-6">
                     <div class="card card-flush h-100">
@@ -239,56 +288,56 @@
                                         @forelse($organisasiDiikuti as $org)
                                             <tr>
                                                 <td>{{ $org->organisasi->nama_organisasi ?? '-' }}</td>
-                                                
-                                                <td>{{ \Carbon\Carbon::parse($org->pivot->created_at ?? $org->created_at)->format('d M Y') }}</td>
-                                            </tr>
-                                        @empty
-                                            <tr>
-                                                <td colspan="3" class="text-center text-muted">Belum mengikuti organisasi.</td>
-                                            </tr>
-                                        @endforelse
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- Kegiatan Diikuti -->
-                <div class="col-xl-6">
-                    <div class="card card-flush h-100">
-                        <div class="card-header pt-5">
-                            <h3 class="card-title fw-bold text-dark">Kegiatan Diikuti</h3>
-                        </div>
-                        <div class="card-body pt-3">
-                            <div class="table-responsive">
-                                <table class="table table-row-dashed align-middle gs-0 gy-3">
-                                    <thead>
-                                        <tr class="fw-bold text-gray-400">
-                                            <th class="min-w-150px">Nama Kegiatan</th>
-                                            <th class="min-w-100px">Tanggal</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        @forelse($kegiatanSaya as $kegiatan)
-                                            <tr>
-                                                <td>{{ $kegiatan->kegiatan->nama_kegiatan ?? '-' }}</td>
-                                                
-                                                <td>{{ \Carbon\Carbon::parse($kegiatan->tanggal_mulai ?? $kegiatan->created_at)->format('d M Y') }}</td>
-                                            </tr>
-                                        @empty
-                                            <tr>
-                                                <td colspan="3" class="text-center text-muted">Belum mengikuti kegiatan.</td>
-                                            </tr>
-                                        @endforelse
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div> --}}
-            <!--begin::Row-->
-            {{-- <div class="row g-5 g-xl-10 mb-5 mb-xl-10">
+
+<td>{{ \Carbon\Carbon::parse($org->pivot->created_at ?? $org->created_at)->format('d M Y') }}</td>
+</tr>
+@empty
+<tr>
+    <td colspan="3" class="text-center text-muted">Belum mengikuti organisasi.</td>
+</tr>
+@endforelse
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+<!-- Kegiatan Diikuti -->
+<div class="col-xl-6">
+    <div class="card card-flush h-100">
+        <div class="card-header pt-5">
+            <h3 class="card-title fw-bold text-dark">Kegiatan Diikuti</h3>
+        </div>
+        <div class="card-body pt-3">
+            <div class="table-responsive">
+                <table class="table table-row-dashed align-middle gs-0 gy-3">
+                    <thead>
+                        <tr class="fw-bold text-gray-400">
+                            <th class="min-w-150px">Nama Kegiatan</th>
+                            <th class="min-w-100px">Tanggal</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @forelse($kegiatanSaya as $kegiatan)
+                        <tr>
+                            <td>{{ $kegiatan->kegiatan->nama_kegiatan ?? '-' }}</td>
+
+                            <td>{{ \Carbon\Carbon::parse($kegiatan->tanggal_mulai ?? $kegiatan->created_at)->format('d M Y') }}</td>
+                        </tr>
+                        @empty
+                        <tr>
+                            <td colspan="3" class="text-center text-muted">Belum mengikuti kegiatan.</td>
+                        </tr>
+                        @endforelse
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+</div> --}}
+<!--begin::Row-->
+{{-- <div class="row g-5 g-xl-10 mb-5 mb-xl-10">
 				<!--begin::Col-->
 				<div class="col-xl-6">
 					<!--begin::Card widget 19-->
@@ -471,9 +520,9 @@
 				</div>
 				<!--end::Col-->
 			</div> --}}
-            <!--end::Row-->
-            <!--begin::Row-->
-            {{-- <div class="row g-5 g-xl-10 mb-5 mb-xl-10">
+<!--end::Row-->
+<!--begin::Row-->
+{{-- <div class="row g-5 g-xl-10 mb-5 mb-xl-10">
                 <!--begin::Col-->
                 <div class="col-xl-4">
                     <!--begin::Chart Widget 37-->
@@ -1187,9 +1236,9 @@
                 </div>
                 <!--end::Col-->
             </div> --}}
-            <!--end::Row-->
-            <!--begin::Row-->
-            {{-- <div class="row g-5 g-xl-10">
+<!--end::Row-->
+<!--begin::Row-->
+{{-- <div class="row g-5 g-xl-10">
                 <!--begin::Col-->
                 <div class="col-xl-4">
                     <!--begin::Chart widget 31-->
@@ -1251,154 +1300,153 @@
                 </div>
                 <!--end::Col-->
             </div> --}}
-            <!--end::Row-->
-        </div>
-        <!--end::Content container-->
-    </div>
+<!--end::Row-->
+</div>
+<!--end::Content container-->
+</div>
 
 </div>
 @push('scripts')
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
-    <script>
-		$(function() {
-			$('input[id="range"]').daterangepicker({
-			opens: "left",
-			locale: {
-				format: "MM/DD/YYYY"
-			}
-			});
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+<script>
+    $(function() {
+        $('input[id="range"]').daterangepicker({
+            opens: "left"
+            , locale: {
+                format: "MM/DD/YYYY"
+            }
+        });
 
 
-			$("#range").on("apply.daterangepicker", function(event, picker) {
-			$(this).val(
-				picker.startDate.format("MM/DD/YYYY") +
-				" - " +
-				picker.endDate.format("MM/DD/YYYY")
-			);
-			Livewire.dispatch('loadData', {
-				startDate: picker.startDate.format("YYYY-MM-DD"),
-				endDate: picker.endDate.format("YYYY-MM-DD")
-			});
-			});
+        $("#range").on("apply.daterangepicker", function(event, picker) {
+            $(this).val(
+                picker.startDate.format("MM/DD/YYYY") +
+                " - " +
+                picker.endDate.format("MM/DD/YYYY")
+            );
+            Livewire.dispatch('loadData', {
+                startDate: picker.startDate.format("YYYY-MM-DD")
+                , endDate: picker.endDate.format("YYYY-MM-DD")
+            });
+        });
 
 
-			$("#range").on("cancel.daterangepicker", function() {
-			$(this).val('');
-			});
-		});
+        $("#range").on("cancel.daterangepicker", function() {
+            $(this).val('');
+        });
+    });
 
-	
-        
 
-        // (function () {
-        //     var e = document.getElementById("kt_charts_widget_3_chart");
-        //     if (e) {
-        //     var t = { self: null, rendered: false };
 
-        //     var renderChart = function () {
-        //         var chartHeight = parseInt(KTUtil.css(e, "height"));
-        //         var gray500 = KTUtil.getCssVariableValue("--bs-gray-500");
-        //         var gray200 = KTUtil.getCssVariableValue("--bs-gray-200");
-        //         var infoColor = KTUtil.getCssVariableValue("--bs-info");
 
-        //         var options = {
-        //         series: [
-        //             {
-        //             name: "Monthly Service",
-        //             data: window.incomeChartData.map(item => item.income),
-        //             },
-        //         ],
-        //         chart: {
-        //             fontFamily: "inherit",
-        //             type: "area",
-        //             height: chartHeight,
-        //             toolbar: { show: false },
-        //         },
-        //         plotOptions: {},
-        //         legend: { show: false },
-        //         dataLabels: { enabled: false },
-        //         fill: { type: "solid", opacity: 1 },
-        //         stroke: {
-        //             curve: "smooth",
-        //             show: true,
-        //             width: 3,
-        //             colors: [infoColor],
-        //         },
-        //         xaxis: {
-        //             categories: window.incomeChartData.map(item => item.hour),
-        //             axisBorder: { show: false },
-        //             axisTicks: { show: false },
-        //             labels: {
-        //             style: {
-        //                 colors: gray500,
-        //                 fontSize: "12px",
-        //             },
-        //             },
-        //             crosshairs: {
-        //             position: "front",
-        //             stroke: {
-        //                 color: infoColor,
-        //                 width: 1,
-        //                 dashArray: 3,
-        //             },
-        //             },
-        //             tooltip: {
-        //             enabled: true,
-        //             offsetY: 0,
-        //             style: { fontSize: "12px" },
-        //             },
-        //         },
-        //         yaxis: {
-        //             labels: {
-        //             style: {
-        //                 colors: gray500,
-        //                 fontSize: "12px",
-        //             },
-        //             },
-        //         },
-        //         states: {
-        //             normal: { filter: { type: "none", value: 0 } },
-        //             hover: { filter: { type: "none", value: 0 } },
-        //             active: {
-        //             allowMultipleDataPointsSelection: false,
-        //             filter: { type: "none", value: 0 },
-        //             },
-        //         },
-        //         tooltip: {
-        //             style: { fontSize: "12px" },
-        //             y: {
-        //             formatter: function (value) {
-        //                 return "Rp " + value + "K";
-        //             },
-        //             },
-        //         },
-        //         colors: [
-        //             KTUtil.getCssVariableValue("--bs-info-light"),
-        //         ],
-        //         grid: {
-        //             borderColor: gray200,
-        //             strokeDashArray: 4,
-        //             yaxis: { lines: { show: true } },
-        //         },
-        //         markers: { strokeColor: infoColor, strokeWidth: 3 },
-        //         };
+    // (function () {
+    //     var e = document.getElementById("kt_charts_widget_3_chart");
+    //     if (e) {
+    //     var t = { self: null, rendered: false };
 
-        //         t.self = new ApexCharts(e, options);
-        //         t.self.render();
-        //         t.rendered = true;
-        //     };
+    //     var renderChart = function () {
+    //         var chartHeight = parseInt(KTUtil.css(e, "height"));
+    //         var gray500 = KTUtil.getCssVariableValue("--bs-gray-500");
+    //         var gray200 = KTUtil.getCssVariableValue("--bs-gray-200");
+    //         var infoColor = KTUtil.getCssVariableValue("--bs-info");
 
-        //     renderChart();
+    //         var options = {
+    //         series: [
+    //             {
+    //             name: "Monthly Service",
+    //             data: window.incomeChartData.map(item => item.income),
+    //             },
+    //         ],
+    //         chart: {
+    //             fontFamily: "inherit",
+    //             type: "area",
+    //             height: chartHeight,
+    //             toolbar: { show: false },
+    //         },
+    //         plotOptions: {},
+    //         legend: { show: false },
+    //         dataLabels: { enabled: false },
+    //         fill: { type: "solid", opacity: 1 },
+    //         stroke: {
+    //             curve: "smooth",
+    //             show: true,
+    //             width: 3,
+    //             colors: [infoColor],
+    //         },
+    //         xaxis: {
+    //             categories: window.incomeChartData.map(item => item.hour),
+    //             axisBorder: { show: false },
+    //             axisTicks: { show: false },
+    //             labels: {
+    //             style: {
+    //                 colors: gray500,
+    //                 fontSize: "12px",
+    //             },
+    //             },
+    //             crosshairs: {
+    //             position: "front",
+    //             stroke: {
+    //                 color: infoColor,
+    //                 width: 1,
+    //                 dashArray: 3,
+    //             },
+    //             },
+    //             tooltip: {
+    //             enabled: true,
+    //             offsetY: 0,
+    //             style: { fontSize: "12px" },
+    //             },
+    //         },
+    //         yaxis: {
+    //             labels: {
+    //             style: {
+    //                 colors: gray500,
+    //                 fontSize: "12px",
+    //             },
+    //             },
+    //         },
+    //         states: {
+    //             normal: { filter: { type: "none", value: 0 } },
+    //             hover: { filter: { type: "none", value: 0 } },
+    //             active: {
+    //             allowMultipleDataPointsSelection: false,
+    //             filter: { type: "none", value: 0 },
+    //             },
+    //         },
+    //         tooltip: {
+    //             style: { fontSize: "12px" },
+    //             y: {
+    //             formatter: function (value) {
+    //                 return "Rp " + value + "K";
+    //             },
+    //             },
+    //         },
+    //         colors: [
+    //             KTUtil.getCssVariableValue("--bs-info-light"),
+    //         ],
+    //         grid: {
+    //             borderColor: gray200,
+    //             strokeDashArray: 4,
+    //             yaxis: { lines: { show: true } },
+    //         },
+    //         markers: { strokeColor: infoColor, strokeWidth: 3 },
+    //         };
 
-        //     KTThemeMode.on("kt.thememode.change", function () {
-        //         if (t.rendered) {
-        //         t.self.destroy();
-        //         }
-        //         renderChart();
-        //     });
-        //     }
-        // })();
-       
+    //         t.self = new ApexCharts(e, options);
+    //         t.self.render();
+    //         t.rendered = true;
+    //     };
 
-    </script>
+    //     renderChart();
+
+    //     KTThemeMode.on("kt.thememode.change", function () {
+    //         if (t.rendered) {
+    //         t.self.destroy();
+    //         }
+    //         renderChart();
+    //     });
+    //     }
+    // })();
+
+</script>
 @endpush

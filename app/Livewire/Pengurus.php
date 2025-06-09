@@ -76,7 +76,7 @@ class Pengurus extends Component
 
             $anggota = Anggota::findOrFail($this->id_anggota);
             $user = $anggota->user; 
-            
+                
             if ($user) {
             $user->syncRoles(['pengurus']);
             }
