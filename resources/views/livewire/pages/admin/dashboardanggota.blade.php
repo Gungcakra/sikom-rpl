@@ -198,7 +198,7 @@
             </div>
         
             <!--end::Row-->
-            <div class="row g-5 g-xl-10 mb-5 mb-xl-10">
+            <div class="row g-5 g-xl-10 mb-5 mb-xl-10" wire:poll.500ms>
                 @forelse($pengumumanSaya as $pengumuman)
                     <div class="col-xl-4 col-md-6 mb-4">
                         <div class="card shadow-sm border-0 h-100" style="border-radius: 1rem;">
