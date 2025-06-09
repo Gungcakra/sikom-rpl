@@ -35,7 +35,7 @@ class Dashboard extends Component
             $this->organisasiDiikuti = $anggotaList;
             $this->pengumumanSaya = \App\Models\Pengumuman::whereIn('id_organisasi', $organisasiIds)
                 ->orderBy('created_at', 'desc')
-                ->take(5)
+                ->take(6)
                 ->get();
             }
         

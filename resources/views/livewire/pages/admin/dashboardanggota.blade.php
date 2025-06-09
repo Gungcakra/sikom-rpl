@@ -198,9 +198,9 @@
             </div>
         
             <!--end::Row-->
-            <div wire:poll.500ms class="row g-5 g-xl-10 mb-5 mb-xl-10">
+            <div wire:poll.1s="refreshPengumuman" class="row g-5 g-xl-10 mb-5 mb-xl-10">
                 @forelse($pengumumanSaya as $pengumuman)
-                    <div class="col-xl-4 col-md-6 mb-4">
+                    <div class="col-xl-4 col-md-6 mb-4" wire:key="pengumuman-{{ $pengumuman->id }}">
                         <div class="card shadow-sm border-0 h-100" style="border-radius: 1rem;">
                             <div class="card-body d-flex flex-column justify-content-between" style="background: #fff; border-radius: 1rem;">
                                 <span class="badge bg-light text-primary mb-2">{{ \Carbon\Carbon::parse($pengumuman->tanggal_post)->format('d M Y') }}</span>
