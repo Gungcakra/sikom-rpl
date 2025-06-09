@@ -53,11 +53,11 @@ Untuk keperluan uji coba, berikut adalah beberapa akun yang dapat digunakan:
 - Password: `adminsikom`
 
 ### 👤 Pengurus
-- Email: `joko.rahmawati5@mail.com`  
+- Email: `lestari.hidayat11@mail.com`  
 - Password: `anggota123`
 
 ### 👥 Anggota
-- Email: `rizki.pratama1@mail.com`  
+- Email: `joko.rahmawati6@mail.com`  
 - Password: `anggota123`
 
 ---
