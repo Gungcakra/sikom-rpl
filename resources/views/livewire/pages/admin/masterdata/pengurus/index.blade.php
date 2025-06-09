@@ -16,9 +16,11 @@
                 </ul>
             </div>
             <div class="d-flex align-items-center gap-2 gap-lg-3">
+                @if(Auth::user()->roles->pluck('name')->first() == 'admin')
                 <button class="btn btn-sm fw-bold btn-primary" wire:click="create()" type="button" data-bs-toggle="collapse" data-bs-target="#collapsePengurusForm" aria-expanded="false" aria-controls="collapsePengurusForm">
                     Tambah Pengurus
                 </button>
+                @endif
             </div>
         </div>
     </div>
@@ -44,9 +46,9 @@
                             <select class="form-select" data-control="select2" data-placeholder="Pilih Anggota" wire:model="id_anggota" onchange="@this.set('id_anggota', this.value)">
                                 <option></option>
                                 @foreach($anggotas as $anggota)
-                                    <option value="{{ $anggota->id_anggota }}" {{ $id_anggota == $anggota->id_anggota ? 'selected' : '' }}>
-                                        {{ $anggota->nama . ' - ' }} {{ $anggota->organisasi->nama_organisasi }}
-                                    </option>
+                                <option value="{{ $anggota->id_anggota }}" {{ $id_anggota == $anggota->id_anggota ? 'selected' : '' }}>
+                                    {{ $anggota->nama . ' - ' }} {{ $anggota->organisasi->nama_organisasi }}
+                                </option>
                                 @endforeach
                             </select>
                         </div>
@@ -102,9 +104,13 @@
                         <thead>
                             <tr class="fw-semibold fs-6 text-muted">
                                 <th>No</th>
+                                @if(Auth::user()->roles->pluck('name')->first() == 'admin')
                                 <th>Aksi</th>
+                                @endif
                                 <th>Nama Anggota</th>
+                                @if(Auth::user()->roles->pluck('name')->first() == 'admin')
                                 <th>Organisasi</th>
+                                @endif
                                 <th>Jabatan</th>
                                 <th>Periode Mulai</th>
                                 <th>Periode Akhir</th>
@@ -118,6 +124,7 @@
                                 @foreach ($data as $index => $pengurus)
                                 <tr wire:key="Pengurus-{{ $pengurus->id_pengurus }}">
                                     <td>{{ $data->firstItem() + $index }}</td>
+                                    @if(Auth::user()->roles->pluck('name')->first() == 'admin')
                                     <td>
                                         <a href="#" class="btn btn-sm btn-light btn-flex btn-center btn-active-light-primary" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">Aksi
                                             <i class="ki-duotone ki-down fs-5 ms-1"></i>
@@ -131,11 +138,14 @@
                                             </div>
                                         </div>
                                     </td>
+                                    @endif
                                     <td>{{ $pengurus->anggota->nama ?? '-' }}</td>
+                                    @if(Auth::user()->roles->pluck('name')->first() == 'admin')
                                     <td>{{ $pengurus->anggota->organisasi->nama_organisasi}}</td>
+                                    @endif
                                     <td>{{ $pengurus->jabatan }}</td>
-                                    <td>{{ $pengurus->periode_mulai }}</td>
-                                    <td>{{ $pengurus->periode_akhir }}</td>
+                                    <td>{{ \Carbon\Carbon::parse($pengurus->periode_mulai)->locale('id')->translatedFormat('d F Y') }}</td>
+                                    <td>{{ \Carbon\Carbon::parse($pengurus->periode_akhir)->locale('id')->translatedFormat('d F Y') }}</td>
                                 </tr>
                                 @endforeach
                                 @endif
@@ -184,8 +194,7 @@
                 title: message
                 , showCancelButton: true
                 , confirmButtonText: "Ya"
-,
-                confirmButtonColor: "#d33"
+                , confirmButtonColor: "#d33"
                 , cancelButtonText: "Tidak"
                 , icon: "warning"
             }).then((result) => {
