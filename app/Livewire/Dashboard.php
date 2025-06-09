@@ -43,6 +43,17 @@ class Dashboard extends Component
             $this->getDataKepengurusan();
         }
     }
+    public function refreshPengumuman ()
+    {
+        $user = Auth::user();
+        $anggota = Anggota::where('id_user', $user->id)->first();
+        if ($anggota) {
+            $this->pengumumanSaya = \App\Models\Pengumuman::where('id_organisasi', $anggota->id_organisasi)
+                ->orderBy('created_at', 'desc')
+                ->take(6)
+                ->get();
+        }
+    }
     public function getDataKepengurusan()
     {
         $idAnggota = \App\Models\Anggota::where('id_user', Auth::id())
