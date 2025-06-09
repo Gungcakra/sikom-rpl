@@ -4,14 +4,12 @@ namespace Database\Seeders;
 
 use App\Models\Anggota;
 use App\Models\Bank;
-use App\Models\Customer;
+use App\Models\Pengumuman;
 use App\Models\Departement;
-use App\Models\Employee;
 use App\Models\Menu;
 use App\Models\Pengurus;
-use App\Models\Service;
-use App\Models\SparePart;
 use App\Models\SubMenu;
+use App\Models\Transaksi;
 use App\Models\User;
 use Carbon\Carbon;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
@@ -636,5 +634,179 @@ class DatabaseSeeder extends Seeder
                 }
             }
         }
+
+
+        // Seed Bank
+        Bank::insert([
+            [
+                'id_organisasi' => 8, // UKM Programmer (Progress)
+                'nama_bank' => 'Bank BNI Progress',
+                'nomor_rekening' => '111001001',
+                'atas_nama' => 'UKM Progress',
+                'nominal' => 500000,
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
+                'id_organisasi' => 1, // Senat Mahasiswa
+                'nama_bank' => 'Kas Senat STIKOM',
+                'nomor_rekening' => '111001002',
+                'atas_nama' => 'Senat Mahasiswa',
+                'nominal' => 800000,
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
+                'id_organisasi' => 11, // HIMAJESTIK
+                'nama_bank' => 'HIMAJESTIK Account',
+                'nomor_rekening' => '111001003',
+                'atas_nama' => 'HIMAJESTIK',
+                'nominal' => 600000,
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
+                'id_organisasi' => 17, // SBMC
+                'nama_bank' => 'SBMC Official',
+                'nomor_rekening' => '111001004',
+                'atas_nama' => 'SBMC',
+                'nominal' => 450000,
+                'created_at' => now(),
+                'updated_at' => now(),
+            ]
+        ]);
+
+        Transaksi::insert([
+            // Progress
+            ['id_bank' => 1, 'nominal' => 100000, 'jenis_transaksi' => 'pemasukan', 'keterangan' => 'Iuran anggota', 'created_at' => now(), 'updated_at' => now()],
+            ['id_bank' => 1, 'nominal' => 25000,  'jenis_transaksi' => 'pengeluaran', 'keterangan' => 'Beli kertas', 'created_at' => now(), 'updated_at' => now()],
+            ['id_bank' => 1, 'nominal' => 200000, 'jenis_transaksi' => 'pemasukan', 'keterangan' => 'Dana sponsor', 'created_at' => now(), 'updated_at' => now()],
+            ['id_bank' => 1, 'nominal' => 50000,  'jenis_transaksi' => 'pengeluaran', 'keterangan' => 'Makan rapat', 'created_at' => now(), 'updated_at' => now()],
+            ['id_bank' => 1, 'nominal' => 100000, 'jenis_transaksi' => 'pengeluaran', 'keterangan' => 'Transport kegiatan', 'created_at' => now(), 'updated_at' => now()],
+
+            // Senat
+            ['id_bank' => 2, 'nominal' => 150000, 'jenis_transaksi' => 'pemasukan', 'keterangan' => 'Iuran tahunan', 'created_at' => now(), 'updated_at' => now()],
+            ['id_bank' => 2, 'nominal' => 50000,  'jenis_transaksi' => 'pengeluaran', 'keterangan' => 'Cetak proposal', 'created_at' => now(), 'updated_at' => now()],
+            ['id_bank' => 2, 'nominal' => 100000, 'jenis_transaksi' => 'pemasukan', 'keterangan' => 'Donasi alumni', 'created_at' => now(), 'updated_at' => now()],
+            ['id_bank' => 2, 'nominal' => 30000,  'jenis_transaksi' => 'pengeluaran', 'keterangan' => 'Konsumsi rapat', 'created_at' => now(), 'updated_at' => now()],
+            ['id_bank' => 2, 'nominal' => 100000, 'jenis_transaksi' => 'pengeluaran', 'keterangan' => 'Beli banner', 'created_at' => now(), 'updated_at' => now()],
+
+            // HIMAJESTIK
+            ['id_bank' => 3, 'nominal' => 80000,  'jenis_transaksi' => 'pemasukan', 'keterangan' => 'Penjualan majalah', 'created_at' => now(), 'updated_at' => now()],
+            ['id_bank' => 3, 'nominal' => 30000,  'jenis_transaksi' => 'pengeluaran', 'keterangan' => 'Beli tinta printer', 'created_at' => now(), 'updated_at' => now()],
+            ['id_bank' => 3, 'nominal' => 100000, 'jenis_transaksi' => 'pemasukan', 'keterangan' => 'Sponsor acara', 'created_at' => now(), 'updated_at' => now()],
+            ['id_bank' => 3, 'nominal' => 40000,  'jenis_transaksi' => 'pengeluaran', 'keterangan' => 'Sewa tempat diskusi', 'created_at' => now(), 'updated_at' => now()],
+            ['id_bank' => 3, 'nominal' => 50000,  'jenis_transaksi' => 'pengeluaran', 'keterangan' => 'Konsumsi peliputan', 'created_at' => now(), 'updated_at' => now()],
+
+            // SBMC
+            ['id_bank' => 4, 'nominal' => 120000, 'jenis_transaksi' => 'pemasukan', 'keterangan' => 'Uang kas', 'created_at' => now(), 'updated_at' => now()],
+            ['id_bank' => 4, 'nominal' => 30000,  'jenis_transaksi' => 'pengeluaran', 'keterangan' => 'Perawatan alat musik', 'created_at' => now(), 'updated_at' => now()],
+            ['id_bank' => 4, 'nominal' => 100000, 'jenis_transaksi' => 'pemasukan', 'keterangan' => 'Dana sponsor event', 'created_at' => now(), 'updated_at' => now()],
+            ['id_bank' => 4, 'nominal' => 20000,  'jenis_transaksi' => 'pengeluaran', 'keterangan' => 'Cetak tiket', 'created_at' => now(), 'updated_at' => now()],
+            ['id_bank' => 4, 'nominal' => 50000,  'jenis_transaksi' => 'pengeluaran', 'keterangan' => 'Snack latihan', 'created_at' => now(), 'updated_at' => now()],
+        ]);
+
+        // Seed Pengumuman
+        Pengumuman::insert([
+            [
+                'id_organisasi' => 8,
+                'judul' => 'Pendaftaran Anggota Baru Progress',
+                'isi' => 'Dibuka pendaftaran anggota baru UKM Programmer (Progress). Daftar sebelum 10 September melalui website SIKOM.',
+                'tanggal_post' => now()->subDays(7),
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
+                'id_organisasi' => 8,
+                'judul' => 'Workshop ReactJS untuk Anggota',
+                'isi' => 'Anggota Progress diundang mengikuti Workshop ReactJS pada Sabtu, 14 September. Tempat terbatas!',
+                'tanggal_post' => now()->subDays(5),
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
+                'id_organisasi' => 8,
+                'judul' => 'Evaluasi Internal dan Sharing Project',
+                'isi' => 'Kegiatan evaluasi & sharing project Progress akan diadakan minggu depan. Wajib untuk seluruh anggota aktif.',
+                'tanggal_post' => now()->subDays(2),
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+
+            [
+                'id_organisasi' => 1,
+                'judul' => 'Open Recruitment Panitia Dies Natalis',
+                'isi' => 'Senat membuka kesempatan bagi anggota untuk menjadi panitia Dies Natalis STIKOM Bali.',
+                'tanggal_post' => now()->subDays(6),
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
+                'id_organisasi' => 1,
+                'judul' => 'Pelatihan Leadership Mahasiswa',
+                'isi' => 'Anggota Senat diundang mengikuti pelatihan kepemimpinan yang akan dilaksanakan 18 September.',
+                'tanggal_post' => now()->subDays(3),
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
+                'id_organisasi' => 1,
+                'judul' => 'Rapat Koordinasi Kegiatan Semester Ganjil',
+                'isi' => 'Mohon kehadiran seluruh anggota dalam rapat koordinasi kegiatan semester ganjil.',
+                'tanggal_post' => now()->subDay(),
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+
+            [
+                'id_organisasi' => 11,
+                'judul' => 'Pendaftaran Tim Liputan Kampus',
+                'isi' => 'HIMAJESTIK membuka pendaftaran bagi anggota untuk bergabung dalam tim liputan kampus.',
+                'tanggal_post' => now()->subDays(5),
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
+                'id_organisasi' => 11,
+                'judul' => 'Pelatihan Dasar Jurnalistik',
+                'isi' => 'Pelatihan dasar jurnalistik akan dilaksanakan pada 16 September. Terbuka untuk seluruh anggota.',
+                'tanggal_post' => now()->subDays(3),
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
+                'id_organisasi' => 11,
+                'judul' => 'Agenda Pemotretan dan Dokumentasi',
+                'isi' => 'Anggota HIMAJESTIK diundang untuk mengikuti kegiatan dokumentasi acara kampus pada minggu ini.',
+                'tanggal_post' => now()->subDays(1),
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+
+            [
+                'id_organisasi' => 17,
+                'judul' => 'Pendaftaran Anggota Baru SBMC',
+                'isi' => 'SBMC membuka pendaftaran anggota baru bagi mahasiswa yang tertarik di bidang musik.',
+                'tanggal_post' => now()->subDays(6),
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
+                'id_organisasi' => 17,
+                'judul' => 'Latihan Perdana dan Perkenalan Alat Musik',
+                'isi' => 'Kegiatan latihan perdana SBMC akan dilaksanakan Jumat ini. Wajib hadir bagi anggota baru.',
+                'tanggal_post' => now()->subDays(3),
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
+                'id_organisasi' => 17,
+                'judul' => 'Persiapan Event Musik Kampus',
+                'isi' => 'SBMC akan mengadakan event musik bulan depan. Dimohon anggota aktif ikut persiapan awal.',
+                'tanggal_post' => now()->subDay(),
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+        ]);
     }
 }

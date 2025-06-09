@@ -167,7 +167,7 @@
                         <div class="card-body d-flex align-items-end mb-3">
                             <!--begin::Info-->
                             <div class="d-flex align-items-center">
-                                <span class="fs-3hx text-white fw-bold me-6">{{ $totalSaldo }}</span>
+                                <span class="fs-3hx text-white fw-bold me-6">Rp {{ number_format($totalSaldo, 0, ',', '.') }}</span>
                                 {{-- <div class="fw-bold fs-6 text-white">
 									<span class="d-block">Outbound</span>
 									<span class="">Calls</span>
