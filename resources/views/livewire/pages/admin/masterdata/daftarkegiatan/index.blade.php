@@ -57,7 +57,11 @@
                                     </p>
                                 </div>
                                 <div class="d-flex flex-column gap-2 mt-3">
-                                    <button class="btn btn-sm btn-light-primary" wire:click="daftar({{ $item->id_kegiatan }})">
+                                    <button 
+                                        class="btn btn-sm btn-light-primary" 
+                                        wire:click="daftar({{ $item->id_kegiatan }})"
+                                        @if(\Carbon\Carbon::parse($item->tanggal_pelaksanaan)->isPast()) disabled @endif
+                                    >
                                         <i class="ki-duotone ki-pencil"></i> Daftar
                                     </button>
                                     {{-- <button class="btn btn-sm btn-light-danger" wire:click="confirmDelete({{ $item->id_kegiatan }})">
