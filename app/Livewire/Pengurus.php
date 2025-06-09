@@ -200,9 +200,12 @@ class Pengurus extends Component
                 'data' => ModelsPengurus::with('anggota')
                     ->whereIn('id_anggota', $anggotaOrganisasi)
                     ->when($this->search, function ($query) {
-                        $query->whereHas('anggota', function ($q) {
-                            $q->where('nama', 'like', '%' . $this->search . '%');
-                        })->orWhere('jabatan', 'like', '%' . $this->search . '%');
+                        $query->where(function ($q) {
+                            $q->whereHas('anggota', function ($q2) {
+                                $q2->where('nama', 'like', '%' . $this->search . '%');
+                            })
+                            ->orWhere('jabatan', 'like', '%' . $this->search . '%');
+                        });
                     })
                     ->paginate(10),
                 // Hanya tampilkan anggota yang nim-nya belum pernah jadi pengurus di organisasi manapun dan hanya anggota organisasi user
