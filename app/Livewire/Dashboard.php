@@ -33,7 +33,10 @@ class Dashboard extends Component
             $pendaftaranKegiatan = \App\Models\PendaftaranKegiatan::whereIn('id_anggota', $anggotaIds)->get();
             $this->totalKegiatanAnggota = $pendaftaranKegiatan;
             $this->organisasiDiikuti = $anggotaList;
-            $this->pengumumanSaya = \App\Models\Pengumuman::whereIn('id_organisasi', $organisasiIds)->orderBy('created_at', 'desc')->get();
+            $this->pengumumanSaya = \App\Models\Pengumuman::whereIn('id_organisasi', $organisasiIds)
+                ->orderBy('created_at', 'desc')
+                ->take(5)
+                ->get();
             }
         
         } else if ($checkRoleUser->contains('pengurus')) {
